@@ -1,0 +1,3 @@
+/Users/jamiesampson/Documents/GitHub/321COMS_s20/assignment1/outline/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jamiesampson/Documents/GitHub/321COMS_s20/assignment1/outline/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jamiesampson/Documents/GitHub/321COMS_s20/assignment1/outline/cmake-build-debug/CMakeFiles/outline.dir
