@@ -27,7 +27,6 @@ class Instruction:
         self.dtaddr = None
         self.condaddr = None
 
-        self.execute = None  # FormatType's execute method
         self.format_type = None  # FormatType Enum
 
     def add_properties(self, **kwargs):

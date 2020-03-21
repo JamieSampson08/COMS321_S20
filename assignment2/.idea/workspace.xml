@@ -4,10 +4,11 @@
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emulator_legv8.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulator_legv8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emulator_legv8.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/formatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/formatting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group.txt" beforeDir="false" afterPath="$PROJECT_DIR$/group.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine_state.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +39,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunManager">
-    <configuration name="emulator_legv8" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="driver" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="assignment2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -51,7 +52,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/emulator_legv8.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/driver.py" />
       <option name="PARAMETERS" value="sample_binary.machine" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -62,7 +63,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.emulator_legv8" />
+        <item itemvalue="Python.driver" />
       </list>
     </recent_temporary>
   </component>
@@ -78,7 +79,7 @@
       <updated>1583942534328</updated>
       <workItem from="1583942538293" duration="721000" />
       <workItem from="1584373176299" duration="21081000" />
-      <workItem from="1584735685506" duration="11889000" />
+      <workItem from="1584735685506" duration="16063000" />
     </task>
     <servers />
   </component>
@@ -86,30 +87,30 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="211" y="284" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584421909425">
+    <state x="211" y="284" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584817989945">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="211" y="284" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1584421909425" />
-    <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584421839332">
+    <state x="211" y="284" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1584817989945" />
+    <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584809197582">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.960@0.0.1536.960" timestamp="1584421839332" />
-    <state width="1494" height="265" key="GridCell.Tab.0.bottom" timestamp="1584775497856">
+    <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.960@0.0.1536.960" timestamp="1584809197582" />
+    <state width="1061" height="265" key="GridCell.Tab.0.bottom" timestamp="1584817991064">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
-    <state width="1494" height="265" key="GridCell.Tab.0.center" timestamp="1584775497856">
+    <state width="1061" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584817991064" />
+    <state width="1061" height="265" key="GridCell.Tab.0.center" timestamp="1584817991063">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
-    <state width="1494" height="265" key="GridCell.Tab.0.left" timestamp="1584775497855">
+    <state width="1061" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584817991063" />
+    <state width="1061" height="265" key="GridCell.Tab.0.left" timestamp="1584817991063">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584775497855" />
-    <state width="1494" height="265" key="GridCell.Tab.0.right" timestamp="1584775497856">
+    <state width="1061" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584817991063" />
+    <state width="1061" height="265" key="GridCell.Tab.0.right" timestamp="1584817991064">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
+    <state width="1061" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584817991064" />
     <state width="466" height="327" key="GridCell.Tab.1.bottom" timestamp="1584745571948">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -136,6 +137,6 @@
     <state x="46" y="211" width="670" height="676" key="search.everywhere.popup/0.0.1536.960@0.0.1536.960" timestamp="1584745696490" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="emulator_legv8 Coverage Results" MODIFIED="1584775473398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="driver Coverage Results" MODIFIED="1584817991058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

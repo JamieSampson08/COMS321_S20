@@ -1,33 +1,25 @@
 from formatting import FormatType
 
 
-def print_directory():
-    for name, data in instruct_dir:
-        print("Name: {} Data: {}".format(name, data))
-
-
 """
 opcode = unique instruction code
 format_type = determine how to read in bits
 operation = list of format values to fill
 assembly = <instruction> assembly (ie. how the actual assembly looks like)
 """
-
-# key = instruction name
-# value = dictionary of data related to each instruction
 instruct_dir = {
     "ADD":
     {
         "opcode": b'10001011000',  # ADD
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn + Rm
-        "assembly": "Rd, Rn, Rm",
+        "assembly": "XRd, XRn, XRm",
     },
     "ADDI": {
         "opcode": b'1001000100',  # ADD Immediate
         "format_type": FormatType.I,
         "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn + ALUImm
-        "assembly": "Rd, Rn, aluimm",
+        "assembly": "XRd, XRn, aluimm",
     },
     "AND": {
         "opcode": b'10001010000',  # AND

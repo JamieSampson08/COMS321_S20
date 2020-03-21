@@ -1,22 +1,16 @@
-import sys
-
 from formatting import FormatType
 from instruction import Instruction
 from directory import instruct_dir
 
 
-def main(argv):
+def decode(filename):
     binary_instructions = []
-
-    filename = argv[0]
-    print("Filename: {}".format(filename))
-
     with open(filename, "rb") as file:
         while True:
             opcode6 = file.read(6)
             # print(opcode6)
             if opcode6 == b"":
-                print("Reached End of File")
+                print("Reached End of File\n")
                 break
 
             new_instruction = Instruction(opcode6)
@@ -34,25 +28,24 @@ def main(argv):
             )
 
             opcode_len = find_instruction_name(new_instruction)
-            # print("Opcode Len: {}".format(opcode_len))
+
             if new_instruction.name is None:
                 print("Opcode Does Not Exist")
                 exit(1)
-
-            # print("Original Position: {}".format(file.tell()))
 
             # go back 11 bytes (ie. max bytes looked at to find possible opcode)
             file.seek(-11, 1)  # 1 = referance to current location
 
             # add new opcode length
             file.seek(opcode_len, 1)
-            # print("New Position: {}".format(file.tell()))
 
             fill_format_values(file, new_instruction)
 
             binary_instructions.append(new_instruction)
             construct_assembly(new_instruction)
             print("\n")
+
+    return binary_instructions
 
 
 def find_instruction_name(instruction):
@@ -101,7 +94,7 @@ def fill_format_values(file, instruction):
     format_type = instruct_dir[instruction.name]["format_type"]
 
     format_obj = FormatType(format_type)
-    instruction.add_properties(format_type=format_obj, execute=format_obj.value["execute"])
+    instruction.add_properties(format_type=format_obj)
 
     fill_values = format_obj.value["order"]
 
@@ -130,6 +123,3 @@ def construct_assembly(instruction):
     print(assembly)
     instruction.add_properties(assembly=assembly)
 
-
-if __name__ == "__main__":
-   main(sys.argv[1:])

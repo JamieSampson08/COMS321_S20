@@ -1,3 +1,6 @@
+from directory import instruct_dir
+
+
 def remove_spaces(file, read_length):
     """
     Reads from the file 1 bit at a time, converts to a string & removes spaces
@@ -17,3 +20,16 @@ def remove_spaces(file, read_length):
 
     # return binary string to binary
     return str.encode(final_line)
+
+
+def print_directory():
+    for name, data in instruct_dir:
+        print("Name: {} Data: {}".format(name, data))
+
+
+def printable_char(c):
+    return c if c.isprintable() else '.'
+
+
+def hexdump(file, start, size):
+    print("Hexdump")

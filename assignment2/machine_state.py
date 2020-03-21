@@ -1,10 +1,12 @@
 class Machine:
     def __init__(self):
+        # subtract from stack
         self.stack = bytes(512)
-        self.stack_size = 0
+        self.stack_size = bytes(512)
 
-        self.memory = bytes(4096)
-        self.memory_size = 0
+        # add to memory
+        self.memory = bytes(0)
+        self.memory_size = bytes(4096)
 
         self.PC = 0
 
@@ -52,6 +54,6 @@ class Register:
         else:
             self.use = "General Register"
 
-        self.data = 0 if number == 31 else None
-        self.number = number
+        self.address = 0 if number == 31 else None
+        self.reg_number = number
 
