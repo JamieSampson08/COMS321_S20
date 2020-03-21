@@ -1,1 +1,7 @@
 Jamie Sampson (sampson1)
+
+Spring 2019 : COM S 321 - Computer Architecture
+Professor: Jeremy Sheaffer
+
+Language: Python
+IDE: PyCharm

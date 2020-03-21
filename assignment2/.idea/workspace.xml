@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emulator_legv8.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulator_legv8.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../written2/legv8emul" beforeDir="false" afterPath="$PROJECT_DIR$/../written2/legv8emul" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/formatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/formatting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group.txt" beforeDir="false" afterPath="$PROJECT_DIR$/group.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,8 @@
       <option name="presentableId" value="Default" />
       <updated>1583942534328</updated>
       <workItem from="1583942538293" duration="721000" />
-      <workItem from="1584373176299" duration="20462000" />
+      <workItem from="1584373176299" duration="21081000" />
+      <workItem from="1584735685506" duration="11889000" />
     </task>
     <servers />
   </component>
@@ -91,32 +94,48 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.960@0.0.1536.960" timestamp="1584421839332" />
-    <state width="1494" height="265" key="GridCell.Tab.0.bottom" timestamp="1584432875062">
+    <state width="1494" height="265" key="GridCell.Tab.0.bottom" timestamp="1584775497856">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584432875062" />
-    <state width="1494" height="265" key="GridCell.Tab.0.center" timestamp="1584432875061">
+    <state width="1494" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
+    <state width="1494" height="265" key="GridCell.Tab.0.center" timestamp="1584775497856">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584432875061" />
-    <state width="1494" height="265" key="GridCell.Tab.0.left" timestamp="1584432875061">
+    <state width="1494" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
+    <state width="1494" height="265" key="GridCell.Tab.0.left" timestamp="1584775497855">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584432875061" />
-    <state width="1494" height="265" key="GridCell.Tab.0.right" timestamp="1584432875062">
+    <state width="1494" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584775497855" />
+    <state width="1494" height="265" key="GridCell.Tab.0.right" timestamp="1584775497856">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584432875062" />
+    <state width="1494" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584775497856" />
+    <state width="466" height="327" key="GridCell.Tab.1.bottom" timestamp="1584745571948">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state width="466" height="327" key="GridCell.Tab.1.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584745571948" />
+    <state width="466" height="327" key="GridCell.Tab.1.center" timestamp="1584745571947">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state width="466" height="327" key="GridCell.Tab.1.center/0.0.1536.960@0.0.1536.960" timestamp="1584745571947" />
+    <state width="466" height="327" key="GridCell.Tab.1.left" timestamp="1584745571947">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state width="466" height="327" key="GridCell.Tab.1.left/0.0.1536.960@0.0.1536.960" timestamp="1584745571947" />
+    <state width="466" height="327" key="GridCell.Tab.1.right" timestamp="1584745571947">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state width="466" height="327" key="GridCell.Tab.1.right/0.0.1536.960@0.0.1536.960" timestamp="1584745571947" />
     <state x="100" y="100" width="1336" height="760" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584432093206">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="100" y="100" width="1336" height="760" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.960@0.0.1536.960" timestamp="1584432093206" />
-    <state x="46" y="211" width="670" height="676" key="search.everywhere.popup" timestamp="1584423744443">
+    <state x="46" y="211" width="670" height="676" key="search.everywhere.popup" timestamp="1584745696490">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="46" y="211" width="670" height="676" key="search.everywhere.popup/0.0.1536.960@0.0.1536.960" timestamp="1584423744443" />
+    <state x="46" y="211" width="670" height="676" key="search.everywhere.popup/0.0.1536.960@0.0.1536.960" timestamp="1584745696490" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="emulator_legv8 Coverage Results" MODIFIED="1584432875055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="emulator_legv8 Coverage Results" MODIFIED="1584775473398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

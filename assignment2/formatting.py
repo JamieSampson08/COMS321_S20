@@ -44,6 +44,21 @@ class FormatType(Enum):
     }
 
 
+# all possible format values with corresponding byte length
+format_values = {
+    "shamt": 6,
+    "Rn": 5,
+    "Rd": 5,
+    "Rt": 5,
+    "Rm": 5,
+    "aluimm": 12,
+    "braddr": 26,
+    "dtaddr": 9,
+    "condaddr": 16,
+    "op": 2,
+}
+
+
 def printable_char(c):
     return c if c.isprintable() else '.'
 
