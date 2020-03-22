@@ -71,8 +71,8 @@ instruct_dir = {
     "DUMP": {
         "opcode": b'11111111110',  # TODO
         "format_type": FormatType.R,
-        "operation": [],  # TODO
-        "assembly": "", # TODO
+        "operation": [],
+        "assembly": "",
     },
     "EOR": {
         "opcode": b'11001010000',  # Exclusive OR
@@ -87,10 +87,10 @@ instruct_dir = {
         "assembly": "",  # TODO
     },
     "HALT": {
-        "opcode": b'11111111111',  # TODO
+        "opcode": b'11111111111',  # Trigger DUMP & Terminate
         "format_type": FormatType.R,
-        "operation": [],  # TODO
-        "assebly": "",  # TODO
+        "operation": [],
+        "assebly": "",
     },
     "LDUR": {
         "opcode": b'11111000010',  # Load Register Unscaled Offset
@@ -148,16 +148,16 @@ instruct_dir = {
         "assembly": "",  # TODO
     },
     "PRNL": {
-        "opcode": b"11111111100",  # TODO
+        "opcode": b"11111111100",  # Prints a blank line
         "format_type": FormatType.R,
-        "operation": [],  # TODO
-        "assembly": "",  # TODO
+        "operation": [],
+        "assembly": "",
     },
     "PRNT": {
-        "opcode": b"11111111101",  # TODO
+        "opcode": b"11111111101",  # Prints Register Name & Contents in Hex & Decimal
         "format_type": FormatType.R,
-        "operation": [],  # TODO
-        "assembly": "",  # TODO
+        "operation": ["Rd"],
+        "assembly": "Rd",
     },
     "SDIV": {
         "opcode": b"10011010110",  # Signed Divide

@@ -6,10 +6,10 @@ from decode import decode
 def main(argv):
 
     filename = argv[0]
-    print("Filename: {}\n".format(filename))
+    print("Decoding File: {}\n".format(filename))
     binary_instructions = decode(filename)
 
-    print("Start Executing Instructions:")
+    print("Executing Instructions:")
     execute_assembly(binary_instructions)
 
 

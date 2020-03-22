@@ -4,11 +4,10 @@
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emulator_legv8.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/formatting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
       <updated>1583942534328</updated>
       <workItem from="1583942538293" duration="721000" />
       <workItem from="1584373176299" duration="21081000" />
-      <workItem from="1584735685506" duration="16063000" />
+      <workItem from="1584735685506" duration="21416000" />
     </task>
     <servers />
   </component>
@@ -95,22 +94,22 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.960@0.0.1536.960" timestamp="1584809197582" />
-    <state width="1061" height="265" key="GridCell.Tab.0.bottom" timestamp="1584817991064">
+    <state width="720" height="265" key="GridCell.Tab.0.bottom" timestamp="1584857915952">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1061" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584817991064" />
-    <state width="1061" height="265" key="GridCell.Tab.0.center" timestamp="1584817991063">
+    <state width="720" height="265" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1584857915952" />
+    <state width="720" height="265" key="GridCell.Tab.0.center" timestamp="1584857915951">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1061" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584817991063" />
-    <state width="1061" height="265" key="GridCell.Tab.0.left" timestamp="1584817991063">
+    <state width="720" height="265" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1584857915951" />
+    <state width="720" height="265" key="GridCell.Tab.0.left" timestamp="1584857915950">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1061" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584817991063" />
-    <state width="1061" height="265" key="GridCell.Tab.0.right" timestamp="1584817991064">
+    <state width="720" height="265" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1584857915950" />
+    <state width="720" height="265" key="GridCell.Tab.0.right" timestamp="1584857915951">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1061" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584817991064" />
+    <state width="720" height="265" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1584857915951" />
     <state width="466" height="327" key="GridCell.Tab.1.bottom" timestamp="1584745571948">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -131,12 +130,20 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="100" y="100" width="1336" height="760" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.960@0.0.1536.960" timestamp="1584432093206" />
+    <state x="164" y="404" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584832855109">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state x="164" y="404" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.960@0.0.1536.960" timestamp="1584832855109" />
+    <state x="426" y="115" width="683" height="729" key="find.popup" timestamp="1584856098621">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state x="426" y="115" width="683" height="729" key="find.popup/0.0.1536.960@0.0.1536.960" timestamp="1584856098621" />
     <state x="46" y="211" width="670" height="676" key="search.everywhere.popup" timestamp="1584745696490">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="46" y="211" width="670" height="676" key="search.everywhere.popup/0.0.1536.960@0.0.1536.960" timestamp="1584745696490" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="driver Coverage Results" MODIFIED="1584817991058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="driver Coverage Results" MODIFIED="1584857915945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

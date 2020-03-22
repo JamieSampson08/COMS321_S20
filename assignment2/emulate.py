@@ -1,3 +1,11 @@
+import sys
+
+from helpers import hexdump
+from machine import Machine
+
+machine_state = Machine()
+
+
 def ex_add(instruction):
     print("ADD")
 
@@ -38,8 +46,14 @@ def ex_cbz(instruction):
     print("CBZ")
 
 
-def ex_dump(instruction):
+def ex_dump(start=0):
     print("DUMP")
+    print("Registers")
+    machine_state.print_all_registers()
+    print("Memory")
+    hexdump(sys.stdout, start, machine_state.memory_size)
+    print("Stack")
+    hexdump(sys.stdout, start, machine_state.stack_size)
 
 
 def ex_eor(instruction):
@@ -50,8 +64,10 @@ def ex_eori(instruction):
     print("EORI")
 
 
-def ex_halt(instruction):
+def ex_halt():
     print("HALT")
+    ex_dump()
+    exit()
 
 
 def ex_ldur(instruction):
@@ -90,12 +106,14 @@ def ex_orri(instruction):
     print("ORRI")
 
 
-def ex_prnl(instruction):
+def ex_prnl():
     print("PRNL")
+    print("\n")
 
 
-def ex_prnt(instruction):
+def ex_prnt():
     print("PRNT")
+    machine_state.print_all_registers(include_conditional=True)
 
 
 def ex_sdiv(instruction):
@@ -139,7 +157,6 @@ def ex_umulh(instruction):
 
 
 def execute_assembly(binary_instructions):
-
     for instruction in binary_instructions:
         name = instruction.name
         if name == "ADD":
@@ -163,13 +180,13 @@ def execute_assembly(binary_instructions):
         elif name == "CBZ":
             ex_cbz(instruction)
         elif name == "DUMP":
-            ex_dump(instruction)
+            ex_dump()
         elif name == "EOR":
             ex_eor(instruction)
         elif name == "EORI":
             ex_eori(instruction)
         elif name == "HALT":
-            ex_halt(instruction)
+            ex_halt()
         elif name == "LDUR":
             ex_ldur(instruction)
         elif name == "LDURB":
@@ -189,9 +206,9 @@ def execute_assembly(binary_instructions):
         elif name == "ORRI":
             ex_orri(instruction)
         elif name == "PRNL":
-            ex_prnl(instruction)
+            ex_prnl()
         elif name == "PRNT":
-            ex_prnt(instruction)
+            ex_prnt()
         elif name == "SDIV":
             ex_sdiv(instruction)
         elif name == "SMULH":
