@@ -31,7 +31,7 @@ def decode(filename):
 
             if new_instruction.name is None:
                 print("Opcode Does Not Exist")
-                exit(1)
+                return
 
             # go back 11 bytes (ie. max bytes looked at to find possible opcode)
             file.seek(-11, 1)  # 1 = referance to current location

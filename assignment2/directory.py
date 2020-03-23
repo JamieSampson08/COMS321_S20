@@ -13,13 +13,13 @@ instruct_dir = {
         "opcode": b'10001011000',  # ADD
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn + Rm
-        "assembly": "XRd, XRn, XRm",
+        "assembly": "Rd, Rn, Rm",
     },
     "ADDI": {
         "opcode": b'1001000100',  # ADD Immediate
         "format_type": FormatType.I,
         "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn + ALUImm
-        "assembly": "XRd, XRn, aluimm",
+        "assembly": "Rd, Rn, aluimm",
     },
     "AND": {
         "opcode": b'10001010000',  # AND

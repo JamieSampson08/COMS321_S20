@@ -47,13 +47,16 @@ def ex_cbz(instruction):
 
 
 def ex_dump(start=0):
-    print("DUMP")
-    print("Registers")
     machine_state.print_all_registers()
-    print("Memory")
-    hexdump(sys.stdout, start, machine_state.memory_size)
-    print("Stack")
-    hexdump(sys.stdout, start, machine_state.stack_size)
+
+    print("Memory:\n")
+    # hexdump(sys.stdout, start, machine_state.memory_size)
+
+    print("Stack:\n")
+    # hexdump(sys.stdout, start, machine_state.stack_size)
+
+    machine_state.print_program()
+    exit(1)
 
 
 def ex_eor(instruction):
@@ -156,7 +159,9 @@ def ex_umulh(instruction):
     print("UMULH")
 
 
-def execute_assembly(binary_instructions):
+def execute_assembly(binary_instructions, filename):
+    machine_state.filename = filename
+    ex_dump()
     for instruction in binary_instructions:
         name = instruction.name
         if name == "ADD":
@@ -231,3 +236,4 @@ def execute_assembly(binary_instructions):
             ex_umulh(instruction)
         else:
             print("'{}' not found".format(name))
+    return machine_state

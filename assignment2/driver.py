@@ -10,7 +10,8 @@ def main(argv):
     binary_instructions = decode(filename)
 
     print("Executing Instructions:")
-    execute_assembly(binary_instructions)
+    machine_state = execute_assembly(binary_instructions, filename)
+    machine_state.print_program()
 
 
 if __name__ == "__main__":

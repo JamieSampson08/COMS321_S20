@@ -11,6 +11,8 @@ def remove_spaces(file, read_length):
     final_line = ""
     while len(final_line) != read_length:
         temp_line = file.read(1)
+        if temp_line == b'\n':
+            continue
         # convert binary to string (1s and 0s)
         temp_line = temp_line.decode("utf-8")
         # remove all the spaces
@@ -33,7 +35,7 @@ def print_directory():
 
 def printable_char(c):
     """
-    
+
     :param c:
     :return: c if printable, else "."
     """
