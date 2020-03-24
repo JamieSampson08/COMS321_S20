@@ -21,7 +21,7 @@ def remove_spaces(file, read_length):
         final_line += temp_line
 
     # return binary string to binary
-    return str.encode(final_line)
+    return final_line.encode()
 
 
 def print_directory():
