@@ -1,5 +1,6 @@
 class Register:
     def __init__(self, number, is_conditional=False):
+        self.data = 0
 
         # set usage
         if 0 <= number <= 7:
@@ -16,8 +17,10 @@ class Register:
             self.use = "Saved"
         elif number == 28:
             self.use = "SP"  # Stack Pointer
+            self.data = 512
         elif number == 29:
             self.use = "FP"  # Frame Pointer
+            self.data = 512
         elif number == 30:
             self.use = "LR"  # Return Address/Link Register
         elif number == 31:
@@ -25,7 +28,6 @@ class Register:
         else:
             self.use = "General Register"
 
-        self.data = 0
         self.reg_number = number
         self.is_conditional = is_conditional
 

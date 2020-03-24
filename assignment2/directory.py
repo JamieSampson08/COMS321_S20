@@ -25,13 +25,13 @@ instruct_dir = {
         "opcode": b'10001010000',  # AND
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn & Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "ANDI": {
         "opcode": b'1001001000',  # AND Immediate
         "format_type": FormatType.I,
         "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn & ALUImm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, aluimm",
     },
     "B": {
         "opcode": b'000101',  # Branch
@@ -61,15 +61,16 @@ instruct_dir = {
         "opcode": b'10110101',  # Compare & Branch if Not Zero
         "format_type": FormatType.CB,
         "operation": ["Rt", "condaddr"],  # if(Rt != 0) -> PC = PC + CondBranchAddr
+        "assembly": "Rt, condaddr"
     },
     "CBZ": {
         "opcode": b'10110100',  # Compare & Branch if Zero
         "format_type": FormatType.CB,
-        "operation": ["condaddr"],  # if (Rt == 0) -> PC = PC + CondBranchAddr
-        "assembly": "",  # TODO
+        "operation": ["Rt", "condaddr"],  # if (Rt == 0) -> PC = PC + CondBranchAddr
+        "assembly": "Rt, condaddr",
     },
     "DUMP": {
-        "opcode": b'11111111110',  # TODO
+        "opcode": b'11111111110',  # print all regs, mem, stack, program
         "format_type": FormatType.R,
         "operation": [],
         "assembly": "",
@@ -78,19 +79,19 @@ instruct_dir = {
         "opcode": b'11001010000',  # Exclusive OR
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn ^ Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "EORI": {
         "opcode": b'1101001000',  # Exclusive OR Immediate
         "format_type": FormatType.I,
         "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn ^ ALUImm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, aluimm",
     },
     "HALT": {
         "opcode": b'11111111111',  # Trigger DUMP & Terminate
         "format_type": FormatType.R,
         "operation": [],
-        "assebly": "",
+        "assembly": "",
     },
     "LDUR": {
         "opcode": b'11111000010',  # Load Register Unscaled Offset
@@ -102,19 +103,19 @@ instruct_dir = {
         "opcode": b'00111000010',  # Load Byte Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {56'b0, [Rn + DTAddr](7:0)}
-        "assembly": "",  # TODO
+        "assembly": "Rt, [Rn, dtaddr]",
     },
     "LDURH": {
         "opcode": b'01111000010',  # Load Half Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {48'b0, [Rn + DTAddr](15:0)}
-        "assembly": "",  # TODO
+        "assembly": "Rt, [Rn, dtaddr]",
     },
     "LDURSW": {
         "opcode": b'10111000100',  # Load Signed Word Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {32{[Rn + DTAddr][31]}, [Rn + DTAddr](31:0)}
-        "assembly": "",  # TODO
+        "assembly": "Rt, Rn, [dtaddr]",
     },
     "LSL": {
         "opcode": b"11010011011",  # Logical Shift Left
@@ -133,19 +134,19 @@ instruct_dir = {
         "format_type": FormatType.R,
         "shamt": b"011111",
         "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(63:0)
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "ORR": {
         "opcode": b"10101010000",  # Inclusive OR
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn | Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "ORRI": {
         "opcode": b"1011001000",  # Inclusive OR Immediate
         "format_type": FormatType.I,
-        "operation": ["Rd", "Rn", "aluim"],  # Rd = Rn | ALUImm
-        "assembly": "",  # TODO
+        "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn | ALUImm
+        "assembly": "Rd, Rn, aluimm",
     },
     "PRNL": {
         "opcode": b"11111111100",  # Prints a blank line
@@ -164,13 +165,13 @@ instruct_dir = {
         "format_type": FormatType.R,
         "shamt": b"000010",
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn / Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "SMULH": {
         "opcode": b"10011011010",  # Signed Multiply High
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(127:64)
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "STUR": {
         "opcode": b"11111000000",  # Store Register Unscaled Offset
@@ -182,7 +183,7 @@ instruct_dir = {
         "opcode": b"10111000000",  # Store Word Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr](31:0) = Rt(31:0)
-        "assembly": "",  # TODO
+        "assembly": "Rt, [Rn, dtaddr]",
 
     },
     "SUB": {
@@ -194,33 +195,33 @@ instruct_dir = {
     "SUBI": {
         "opcode": b"1101000100",  # Subtract Immediate
         "format_type": FormatType.I,
-        "operation": ["Rd", "Rn", "aluim"],  # Rd = Rn - ALUImm
-        "assembly": "Rd, Rn, aluim",
+        "operation": ["Rd", "Rn", "aluimm"],  # Rd = Rn - ALUImm
+        "assembly": "Rd, Rn, aluimm",
     },
     "SUBIS": {
         "opcode": b"1111000100",  # Subtract Immediate & Set Flags
         "format_type": FormatType.I,
-        "operation": ["Rd", "Rn", "aluim"],  # Rd, FLAGS = Rn - ALUImm
-        "assembly": "",  # TODO
+        "operation": ["Rd", "Rn", "aluimm"],  # Rd, FLAGS = Rn - ALUImm
+        "assembly": "Rd, Rn, aluimm",
     },
     "SUBS": {
         "opcode": b"11101011000",  # Subtract & Set Flags
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd, FLAGS = Rn - Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "UDIV": {
         "opcode": b"10011010110",  # Unsigned Divide
         "format_type": FormatType.R,
         "shamt": b"000011",
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn / Rm
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
     "UMULH": {
         "opcode": b"10011011110",  # Unsigned Multiply High
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(127:64)
-        "assembly": "",  # TODO
+        "assembly": "Rd, Rn, Rm",
     },
 }
 

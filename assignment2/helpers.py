@@ -33,6 +33,16 @@ def print_directory():
         print("Name: {} Data: {}".format(name, data))
 
 
+def how_to_read_mem_stack_table():
+    message = "\n         *** HOW TO READ THIS TABLE ***\n" \
+              "Left-most Column: offset(hex) of beginning of line\n" \
+              "Next 16 columns: values of 16 bytes(hex) following the line offset\n" \
+              "Data Between Vertical Bars: gives text value of same 16 bytes\n" \
+              "   - if not printable or is an actual period, '.' will print\n" \
+              "Single hex num on left column: gives the size of the data\n"
+    print(message)
+
+
 def printable_char(c):
     """
 
@@ -42,6 +52,7 @@ def printable_char(c):
     return c if c.isprintable() else '.'
 
 
+# TODO - broken
 def hexdump(file, start, size):
     """
 

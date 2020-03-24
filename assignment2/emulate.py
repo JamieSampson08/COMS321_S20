@@ -1,6 +1,6 @@
 import sys
 
-from helpers import hexdump
+from helpers import hexdump, how_to_read_mem_stack_table
 from machine import Machine
 
 machine_state = Machine()
@@ -47,8 +47,8 @@ def ex_cbz(instruction):
 
 
 def ex_dump(start=0):
-    machine_state.print_all_registers()
-
+    machine_state.print_all_registers(include_conditional=True)
+    how_to_read_mem_stack_table()
     print("Memory:\n")
     # hexdump(sys.stdout, start, machine_state.memory_size)
 
@@ -78,15 +78,15 @@ def ex_ldur(instruction):
 
 
 def ex_ldurb(instruction):
-    print("LDURB")
+    print("LDURB NOT IMPLEMENTED")
 
 
 def ex_ldurh(instruction):
-    print("LDURH")
+    print("LDURH NOT IMPLEMENTED")
 
 
 def ex_ldursw(instruction):
-    print("LDRSW")
+    print("LDRSW NOT IMPLEMENTED")
 
 
 def ex_lsl(instruction):
@@ -98,7 +98,7 @@ def ex_lsr(instruction):
 
 
 def ex_mul(instruction):
-    print("MUL")
+    print("MUL NOT IMPLEMENTED")
 
 
 def ex_orr(instruction):
@@ -120,7 +120,7 @@ def ex_prnt():
 
 
 def ex_sdiv(instruction):
-    print("SDIV")
+    print("SDIV NOT IMPLEMENTED")
 
 
 def ex_smulh(instruction):
@@ -132,7 +132,7 @@ def ex_stur(instruction):
 
 
 def ex_sturw(instruction):
-    print("STURW")
+    print("STURW NOT IMPLEMENTED")
 
 
 def ex_sub(instruction):
@@ -152,7 +152,7 @@ def ex_subs(instruction):
 
 
 def ex_udiv(instruction):
-    print("UDIV")
+    print("UDIV NOT IMPLEMENTED")
 
 
 def ex_umulh(instruction):

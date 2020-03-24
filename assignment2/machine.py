@@ -5,11 +5,11 @@ class Machine:
     def __init__(self):
         # subtract from stack
         self.stack = bytes(512)
-        self.stack_size = bytes(512)
+        self.stack_size = 512
 
         # add to memory
         self.memory = bytes(0)
-        self.memory_size = bytes(4096)
+        self.memory_size = 4096
 
         self.PC = 0
         self.filename = None
@@ -34,7 +34,7 @@ class Machine:
             reg.print_register()
 
         if include_conditional:
-            print("Conditional Registers")
+            print("\nConditional Registers:")
             for reg in self.condition_registers:
                 reg.print_register()
 

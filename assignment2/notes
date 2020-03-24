@@ -1,0 +1,4 @@
+Ignore the W, B, and H versions of STUR and LDUR.
+Don't bother with SDIV, UDIV, and the two MUL instructions
+Don't need specific location of DUMP call or where it errors out
+Print Conditional Registers Optional
