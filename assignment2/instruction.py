@@ -1,16 +1,16 @@
 from formatting import format_values
-from helpers import remove_spaces
 
 
 class Instruction:
-    def __init__(self, opcode6):
-        self.opcode6 = opcode6
-
+    def __init__(self):
         # store all variations of opcode combinations (in binary)
+        self.opcode6 = None
         self.opcode8 = None
         self.opcode9 = None
         self.opcode10 = None
         self.opcode11 = None
+
+        self.opcode_len = None
 
         self.name = None  # key from instruct_dir
         self.assembly = None
@@ -31,24 +31,26 @@ class Instruction:
 
     def add_properties(self, **kwargs):
         for key, value in kwargs.items():
-            # print("{0} = {1}".format(key, value))
             setattr(self, key, value)
 
-    def set_format_values(self, file, values):
+    def set_format_values(self, master_opcode, values):
         """
         Sets all format values in the given array of values
         If get=True, return a list of values corresponding to the given format names
-        :param file: that is being read
+        :param master_opcode: all 32 bits read in from file
         :param values: list of format values to get or set
         :return: list if get=True, else None
         """
+        start_offset = self.opcode_len  # start location in 32 bits
 
         for val in values:
             if "opcode" in val:
                 continue
 
-            byte_len = format_values[val]
-            binary_val = remove_spaces(file, byte_len)
+            byte_len = format_values[val]  # length of format value
+            offset = start_offset + byte_len  # end location in 32 bits
+            binary_val = master_opcode[start_offset:offset]  # take the bits between the two values
+            start_offset = offset  # set the new start point to the end point
 
             if val == "shamt":
                 self.shamt = binary_val

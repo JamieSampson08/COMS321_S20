@@ -13,6 +13,7 @@ class Machine:
 
         self.PC = 0
         self.filename = None
+        self.binary_instructions = None
 
         self.registers = []
         self.condition_registers = []
@@ -39,9 +40,6 @@ class Machine:
                 reg.print_register()
 
     def print_program(self):
-        print("Program:")
-        with open(self.filename, "r") as file:
-            contents = file.readlines()
-            for line in contents:
-                print(" ", line.strip("\n"))
-
+        print("Program")
+        for instruct in self.binary_instructions:
+            print(" ", instruct.assembly)

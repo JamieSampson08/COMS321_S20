@@ -5,3 +5,6 @@ Professor: Jeremy Sheaffer
 
 Language: Python
 IDE: PyCharm
+
+TODO:
+- write all functions for instructions

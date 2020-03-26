@@ -1,50 +1,48 @@
 from formatting import FormatType
 from instruction import Instruction
-from directory import instruct_dir
+from directory import instruct_dir, conditions
 
 
 def decode(filename):
     binary_instructions = []
     with open(filename, "rb") as file:
         while True:
-            opcode6 = file.read(6)
-            # print(opcode6)
-            if opcode6 == b"":
-                print("Reached End of File\n")
+            raw_bytes = file.read(4)
+
+            # raw bytes to int
+            int_val = int.from_bytes(raw_bytes, byteorder='big')
+            if int_val == 0:
                 break
 
-            new_instruction = Instruction(opcode6)
+            # int to binary string
+            master_opcode = format(int_val, "b")  # returns a string of format 10010001 (8 bits)
 
-            opcode8 = opcode6 + file.read(2)
-            opcode9 = opcode8 + file.read(1)
-            opcode10 = opcode9 + file.read(1)
-            opcode11 = opcode10 + file.read(1)
+            opcode6 = master_opcode[:6].encode()
+            opcode8 = master_opcode[:8].encode()
+            opcode9 = master_opcode[:9].encode()
+            opcode10 = master_opcode[:10].encode()
+            opcode11 = master_opcode[:11].encode()
 
+            new_instruction = Instruction()
             new_instruction.add_properties(
+                opcode6=opcode6,
                 opcode8=opcode8,
                 opcode9=opcode9,
                 opcode10=opcode10,
                 opcode11=opcode11,
             )
 
-            opcode_len = find_instruction_name(new_instruction)
+            find_instruction_name(new_instruction)
 
             if new_instruction.name is None:
                 print("Opcode Does Not Exist")
                 return
 
-            # go back 11 bytes (ie. max bytes looked at to find possible opcode)
-            file.seek(-11, 1)  # 1 = referance to current location
-
-            # add new opcode length
-            file.seek(opcode_len, 1)
-
-            fill_format_values(file, new_instruction)
-
+            fill_format_values(master_opcode, new_instruction)
             binary_instructions.append(new_instruction)
             construct_assembly(new_instruction)
-            print("\n")
 
+    file.close()
     return binary_instructions
 
 
@@ -79,27 +77,24 @@ def find_instruction_name(instruction):
             opcode_len = 11
             break
 
-    print("Instruction Name: {}".format(name))
-    instruction.add_properties(name=name)
+    instruction.add_properties(name=name, opcode_len=opcode_len)
     return opcode_len
 
 
-def fill_format_values(file, instruction):
+def fill_format_values(master_opcode, instruction):
     """
     Sets the values of the instruction using it's format type
-    :param file: to read from
+    :param master_opcode: all 32 bits read in from file
     :param instruction: to get and set data to
     :return:
     """
     format_type = instruct_dir[instruction.name]["format_type"]
-
     format_obj = FormatType(format_type)
     instruction.add_properties(format_type=format_obj)
 
     fill_values = format_obj.value["order"]
-
-    print("{}".format(fill_values))
-    instruction.set_format_values(file, fill_values)
+    # set all the necessary format values for instruction
+    instruction.set_format_values(master_opcode, fill_values)
 
 
 def construct_assembly(instruction):
@@ -109,17 +104,27 @@ def construct_assembly(instruction):
     :return:
     """
 
-    dir_instruct = instruct_dir[instruction.name]
+    # format values that start with # instead of X
+    integer_offsets = ["dtaddr", "shamt", "aluimm"]
 
+    dir_instruct = instruct_dir[instruction.name]
+    # build the skeleton assembly
     assembly = instruction.name + " " + dir_instruct["assembly"]
-    print(assembly)
     needed_values = dir_instruct["operation"]
     for op in needed_values:
+        # convert binary to int
         binary_value = instruction.get_format_value(op)
-        # print ("{} : {}".format(type(binary_value), binary_value))
         decimal_value = int(binary_value, 2)
-        assembly = assembly.replace(op, "X" + str(decimal_value))
 
-    print(assembly)
+        # handle B.cond weirdness
+        if instruction.name == "B.cond" and op == "Rt":
+            # dictionary takes in hex string
+            condition = conditions[hex(decimal_value)]
+            new_instruct_name = "B.{}".format(condition)
+            assembly = assembly.replace(instruction.name, new_instruct_name)
+        elif op in integer_offsets:
+            assembly = assembly.replace(op, "#" + str(decimal_value))
+        else:
+            assembly = assembly.replace(op, "X" + str(decimal_value))
     instruction.add_properties(assembly=assembly)
 

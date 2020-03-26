@@ -1,36 +1,13 @@
 from directory import instruct_dir
 
 
-def remove_spaces(file, read_length):
-    """
-    Reads from the file 1 bit at a time, converts to a string & removes spaces
-    :param file: to read from
-    :param read_length: expected length of binary
-    :return: binary of length read_length
-    """
-    final_line = ""
-    while len(final_line) != read_length:
-        temp_line = file.read(1)
-        if temp_line == b'\n':
-            continue
-        # convert binary to string (1s and 0s)
-        temp_line = temp_line.decode("utf-8")
-        # remove all the spaces
-        temp_line = temp_line.replace(" ", "")
-        # append to final binary string
-        final_line += temp_line
-
-    # return binary string to binary
-    return final_line.encode()
-
-
 def print_directory():
     """
     Prints all the key value pairs from the dictionary
     :return:
     """
-    for name, data in instruct_dir:
-        print("Name: {} Data: {}".format(name, data))
+    for name, data in instruct_dir.items():
+        print("{} {}".format(name, data["assembly"]))
 
 
 def how_to_read_mem_stack_table():
@@ -55,10 +32,10 @@ def printable_char(c):
 # TODO - broken
 def hexdump(file, start, size):
     """
-
+    Formats the contents of memory/stack
     :param file: to write to
     :param start: address location
-    :param size:
+    :param size: either size of memory or size of stack
     :return:
     """
     i = 0

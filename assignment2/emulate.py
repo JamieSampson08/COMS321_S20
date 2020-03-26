@@ -98,7 +98,7 @@ def ex_lsr(instruction):
 
 
 def ex_mul(instruction):
-    print("MUL NOT IMPLEMENTED")
+    print("MUL")
 
 
 def ex_orr(instruction):
@@ -124,11 +124,19 @@ def ex_sdiv(instruction):
 
 
 def ex_smulh(instruction):
-    print("SMULH")
+    print("SMULH NOT IMPLEMENTED")
 
 
 def ex_stur(instruction):
     print("STUR")
+
+
+def ex_sturh(instruction):
+    print("STURH NOT IMPLEMENTED")
+
+
+def ex_sturw(instruction):
+    print("STURW NOT IMPLEMENTED")
 
 
 def ex_sturw(instruction):
@@ -156,12 +164,13 @@ def ex_udiv(instruction):
 
 
 def ex_umulh(instruction):
-    print("UMULH")
+    print("UMULH NOT IMPLEMENTED")
 
 
 def execute_assembly(binary_instructions, filename):
     machine_state.filename = filename
-    ex_dump()
+    machine_state.binary_instructions = binary_instructions
+
     for instruction in binary_instructions:
         name = instruction.name
         if name == "ADD":
@@ -236,4 +245,5 @@ def execute_assembly(binary_instructions, filename):
             ex_umulh(instruction)
         else:
             print("'{}' not found".format(name))
+        machine_state.PC += 4
     return machine_state

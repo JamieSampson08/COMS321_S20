@@ -2,10 +2,12 @@ from formatting import FormatType
 
 
 """
-opcode = unique instruction code
-format_type = determine how to read in bits
-operation = list of format values to fill
-assembly = <instruction> assembly (ie. how the actual assembly looks like)
+key = instruction name
+value: 
+    opcode = unique instruction code
+    format_type = determine how to read in bits
+    operation = list of format values to fill
+    assembly = <instruction> assembly (ie. how the actual assembly looks like)
 """
 instruct_dir = {
     "ADD":
@@ -42,7 +44,7 @@ instruct_dir = {
     "B.cond": {
         "opcode": b'01010100',  # Branch Conditionally
         "format_type": FormatType.CB,
-        "operation": ["condaddr"],  # if (FLAGS == cond) -> PC = PC + CondBranchAddr
+        "operation": ["condaddr", "Rt"],  # if (FLAGS == cond) -> PC = PC + CondBranchAddr
         "assembly": "condaddr",
     },
     "BL": {
@@ -121,13 +123,13 @@ instruct_dir = {
         "opcode": b"11010011011",  # Logical Shift Left
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "shamt"],  # Rd = Rn << shamt
-        "assembly": "Rd, Rn, #shamt",
+        "assembly": "Rd, Rn, shamt",
     },
     "LSR": {
         "opcode": b"11010011010",  # Logical Shift Right
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "shamt"],  # Rd = Rn >>> shamt
-        "assembly": "Rd, Rn, #shamt",
+        "assembly": "Rd, Rn, shamt",
     },
     "MUL": {
         "opcode": b"10011011000",  # Multiply
@@ -179,6 +181,18 @@ instruct_dir = {
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
     },
+    "STURB":{
+        "opcode": b'00111000000',  # Store Byte Unscaled Offset
+        "format_type": FormatType.D,
+        "operation": ["Rn", "dtaddr", "Rt"],  # Rn + DTAddr(7:0) = Rt(7:0)
+        "assembly": "Rt, Rn, dtaddr",
+    },
+    "STURH": {
+        "opcode": b'01111000000',  # Store Half Unscaled Offset
+        "format_type": FormatType.D,
+        "operation": ["Rt", "dtaddr", "Rt"],  # Rn + DTAddr = Rt(15:0)
+        "assembly": "Rt, Rn, dtaddr",
+    },
     "STURW": {
         "opcode": b"10111000000",  # Store Word Unscaled Offset
         "format_type": FormatType.D,
@@ -225,20 +239,20 @@ instruct_dir = {
     },
 }
 
-# B.cond condition extensions
+# B.cond condition extensions mapping
 conditions = {
-    "EQ": 0x0,
-    "NE": 0x1,
-    "HS": 0x2,
-    "LO": 0x3,
-    "MI": 0x4,
-    "PL": 0x5,
-    "VS": 0x6,
-    "VC": 0x7,
-    "HI": 0x8,
-    "LS": 0x9,
-    "GE": 0x10,
-    "LT": 0x11,
-    "GT": 0x12,
-    "LE": 0x13,
+    '0x0': "EQ",
+    '0x1': "NE",
+    '0x2': "HS",
+    '0x3': "LO",
+    '0x4': "MI",
+    '0x5': "PL",
+    '0x6': "VS",
+    '0x7': "VC",
+    '0x8': "HI",
+    '0x9': "LS",
+    '0xa': "GE",
+    '0xb': "LT",
+    '0xc': "GT",
+    '0xd': "LE",
 }

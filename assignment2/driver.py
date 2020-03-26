@@ -4,14 +4,12 @@ from decode import decode
 
 
 def main(argv):
-
     filename = argv[0]
     print("Decoding File: {}\n".format(filename))
     binary_instructions = decode(filename)
 
     print("Executing Instructions:")
     machine_state = execute_assembly(binary_instructions, filename)
-    machine_state.print_program()
 
 
 if __name__ == "__main__":
