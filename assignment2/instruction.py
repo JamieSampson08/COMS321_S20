@@ -14,6 +14,7 @@ class Instruction:
 
         self.name = None  # key from instruct_dir
         self.assembly = None
+        self.branch_name = None
 
         # values for x type of format
         self.shamt = None

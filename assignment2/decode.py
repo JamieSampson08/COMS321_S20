@@ -1,6 +1,7 @@
 from formatting import FormatType
 from instruction import Instruction
 from directory import instruct_dir, conditions
+from driver import machine_state
 
 
 def decode(filename):

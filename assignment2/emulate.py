@@ -1,9 +1,7 @@
 import sys
 
 from helpers import hexdump, how_to_read_mem_stack_table
-from machine import Machine
-
-machine_state = Machine()
+from driver import machine_state
 
 
 def ex_add(instruction):
@@ -170,6 +168,11 @@ def ex_umulh(instruction):
 def execute_assembly(binary_instructions, filename):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
+
+    # TODO - remove next 3 lines
+    machine_state.print_program()
+    ex_dump()
+    exit(1)
 
     for instruction in binary_instructions:
         name = instruction.name

@@ -1,6 +1,9 @@
 import sys
 from emulate import execute_assembly
 from decode import decode
+from machine import Machine
+
+machine_state = Machine()
 
 
 def main(argv):
