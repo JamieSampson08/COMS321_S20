@@ -56,8 +56,8 @@ instruct_dir = {
     "BR": {
         "opcode": b'11010110000',  # Branch to Register
         "format_type": FormatType.R,
-        "operation": ["Rt"],  # PC = Rt
-        "assembly": "Rt",
+        "operation": ["Rn"],  # PC = Rt
+        "assembly": "Rn",
     },
     "CBNZ": {
         "opcode": b'10110101',  # Compare & Branch if Not Zero

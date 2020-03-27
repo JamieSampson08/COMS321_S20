@@ -11,19 +11,16 @@ def decode(filename, machine_state):
     with open(filename, "rb") as file:
         while True:
             raw_bytes = file.read(4)
-            # print(raw_bytes)
 
             # raw bytes to int
             int_val = int.from_bytes(raw_bytes, byteorder='big')
-            # print(hex(int_val))
-            print(hex(int_val).isdigit())
-            # print(bin(int_val).isascii())
 
             if int_val == 0:
                 break
 
             # int to binary string
             master_opcode = format(int_val, "b")  # returns a string of format 10010001 (8 bits)
+            print(master_opcode)
 
             opcode6 = master_opcode[:6].encode()
             opcode8 = master_opcode[:8].encode()
@@ -123,7 +120,6 @@ def construct_assembly(instruction):
         # convert binary to int
         binary_value = instruction.get_format_value(op)
         decimal_value = int(binary_value, 2)
-
         # handle B.cond weirdness
         if instruction.name == "B.cond" and op == "Rt":
             # dictionary takes in hex string
@@ -135,4 +131,5 @@ def construct_assembly(instruction):
         else:
             assembly = assembly.replace(op, "X" + str(decimal_value))
     instruction.add_properties(assembly=assembly)
+    print(assembly)
 

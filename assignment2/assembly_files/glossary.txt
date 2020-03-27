@@ -1,0 +1,19 @@
+Folder Files
+EMF = empty machine file
+
+Test Files
+------------------------
+branch01 : label (EMF)
+branch02 : `BR LR`
+branch03 :  `B end`
+comments01 : `/` (EMF)
+comments02 : `/` w/ text (EMF)
+comments03 : 1 line assembly + 1 line comment w/ text
+
+
+Complete Assembly Files
+---------------------------
+assignment1 : assignment 1
+q3 : question 3 from written 2
+sample01 :
+sample02 :
