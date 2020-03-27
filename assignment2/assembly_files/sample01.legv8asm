@@ -1,0 +1,160 @@
+MAIN: ADDI X0, XZR, #0
+ADDI X1, XZR, #8    // size of the array
+BL ARRAY_BUILD
+BL EXIT_ALL
+////////////////------ARRAY_BUILDER-----/////////////////////
+ARRAY_BUILD:
+SUBS X10, X9, X1       // X20 = (i - size) and set flags
+B.GE EXIT_AB           // if i >= size, then exit
+SUB X11, X1, X9        // X11(off) = Size(X1) - i(X9)
+LSL X12, X9, #3        // X12 = i*8
+ADD X12, X12, X0       // X12 = (i*8) + (memory address)(X0)
+STUR X11, [X12, #0]
+ADDI X9, X9, #1
+B ARRAY_BUILD
+EXIT_AB:
+BR LR
+///////////////------SELECTION_SORT------////////////////////
+SELECTION_SORT:
+SUBI SP, SP, #40
+STUR LR, [SP, #32]
+STUR X20, [SP, #24]
+STUR X19, [SP, #16]
+STUR X21, [SP, #8]     // X21 - placeholder for X0(*arr)
+STUR X22, [SP, #0]     // X22 - placeholder for X1(size)
+
+ADD X21, XZR, X0
+ADD X22, XZR, X1
+
+ADDI X19, XZR, #0      // i = 0
+ADDI X20, XZR, #0      // smallest = 0
+
+SS_LOOP:
+SUBS X9, X19, X22      //i < size?
+B.GE EXIT_SS
+LSL X9, X19, #3        // X9 = i*8
+ADD X0, X21, X9        // X0 = *arr + (i*8)
+SUB X1, X22, X19       // X1 = size - i
+BL FIND_SMALLEST
+ADD X20, XZR, X0       // smallest = find_smallest(...)
+LSL X9, X20, #3        // X9 = smallest*8
+ADD X9, X9, X21        // X9 = (smallest*8)+(*arr)
+LSL X10, X19, #3       // 10 = i*8
+
+ADD X0, X10, X21      // X11 = i*8 + *arr
+ADD X1, X10, X9       // X1 = arr + smallest + i
+
+BL SWAP
+ADDI X19, X19, #1
+
+B SS_LOOP
+
+EXIT_SS:
+LDUR LR, [SP, #32]
+LDUR X20, [SP, #24]
+LDUR X19, [SP, #16]
+LDUR X21, [SP, #8]
+LDUR X22, [SP, #0]
+ADDI SP, SP, #40
+BR LR
+////////////////-----FIND_SMALLEST------/////////////////////
+FIND_SMALLEST:
+ADDI X9, XZR, #0       // set X9 = 0
+ADDI X10, XZR, #0      // set X10 = 0
+FS_LOOP:
+SUBS X11, X9, X1
+B.GE EXIT_FS
+LSL X11, X9, #3        // X11 = (i*8)
+ADD X11, X11, X0       // X11 = (*arr + (i*8))
+LDUR X12, [X11, #0]    // X12 = arr[i]
+LSL X11, X10, #3
+ADD X11, X11, X0
+LDUR X13, [X11, #0]    // X13 = arr[current]
+SUBS X11, X12, X13
+B.GE NOT_SMALLER
+ADD X10, XZR, X9       // X10(current) = X9(i)
+NOT_SMALLER:
+ADDI X9, X9, #1
+B FS_LOOP
+EXIT_FS:
+ADD X0, XZR, X10       // set X0 as min_index
+BR LR
+///////////////---------SWAP-------///////////////////////////
+SWAP:
+LDUR X9, [X0, #0]      // Temp(X9) = *a(X0)
+LDUR X10,[X1, #0]      // X10 = *b(X1)
+STUR X9, [X1, #0]      // b = temp(X9)
+STUR X10,[X0, #0]      // a = *b(X10)
+BR LR
+//////////////--------ITER_BINARY----/////////////////////////
+ITER_BINARY:
+SUBI SP, SP, #24
+STUR LR, [SP, #0]
+STUR X19, [SP, #8]
+STUR X20, [SP, #16]
+
+ADD X19, XZR, X1
+ADD X20, XZR, X2
+
+IB_LOOP:
+SUBS X9, X20, X19
+B.LT NOT_PRESENT_IB
+SUBI X9, X20, #1      // X9 = (r-1)
+ADD X9, X9, X19       // X9 = l + (r-1)
+LSR X9, X9, #1        // X9 = (l + (r-1))/2
+LSL X10, X9, #3       // X10 = (X9 * 8)
+ADD X10, X10, X0      // X10 = arr + mid
+LDUR X12, [X10, #0]   // X12 = arr[mid]
+SUB X11, X12, X3      // X11 = arr[mid] - target
+CBNZ X11, NOT_MID_IB
+ADD X0, XZR, X9
+B EXIT_IB
+NOT_MID_IB:
+SUBS X11, X3, X12
+B.GE NOT_LESS_IB
+SUBI X20, X9, #1
+NOT_LESS_IB:
+ADDI X19, X9, #1
+B IB_LOOP             // restart loop
+NOT_PRESENT_IB:
+ADDI X0, XZR, #1
+EXIT_IB:
+LDUR LR, [SP, #0]
+LDUR X19, [SP, #8]
+LDUR X20, [SP, #16]
+ADDI SP, SP, #24
+BR LR
+////////////////-----ITER_RECUR-----//////////////////////////
+RECUR_SEARCH:
+SUBI SP, SP, #24
+STUR LR, [SP, #0]
+STUR X1, [SP, #8]
+STUR X2, [SP, #16]
+
+SUBI X9, X2, #1      // X9 = (r-1)
+ADD X9, X9, X1       // X9 = l + (r-1)
+LSR X9, X9, #1        // X9 = (l + (r-1))/2
+LSL X10, X9, #3       // X10 = (X9 * 8)
+ADD X10, X10, X0      // X10 = arr + mid
+LDUR X12, [X10, #0]   // X12 = arr[mid]
+SUB X11, X12, X3      // X11 = arr[mid] - target
+CBNZ X11, NOT_MID
+ADD X4, XZR, X9
+ADDI SP, SP, #24
+BR LR
+NOT_MID:
+SUBS X11, X3, X12
+B.GE NOT_LESS
+SUBI X2, X9, #1
+NOT_LESS:
+ADDI X1, X9, #1
+BL RECUR_SEARCH         // restart loop
+LDUR LR, [SP, #0]
+LDUR X1, [SP, #8]
+LDUR X2, [SP, #16]
+ADDI SP, SP, #24
+BR LR
+////////////////--------EXIT_ALL----//////////////////////////
+
+EXIT_ALL:
+DUMP
