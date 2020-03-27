@@ -1,6 +1,6 @@
-SUBS XZR, X11, X10 // compare X11 and X10
-B.GT endCompare // if greater than, return
-ADDI X7, XZR, #0 // return = 0
+SUBS XZR, X11, X10
+B.GT endCompare
+ADDI X7, XZR, #0
 
 endCompare:
     B return

@@ -20,10 +20,11 @@ def decode(filename, machine_state):
 
             # int to binary string
             master_opcode = format(int_val, "b")  # returns a string of format 10010001 (8 bits)
-            print(master_opcode)
+            print(len(master_opcode))
 
             opcode6 = master_opcode[:6].encode()
             opcode8 = master_opcode[:8].encode()
+            print(opcode8)
             opcode9 = master_opcode[:9].encode()
             opcode10 = master_opcode[:10].encode()
             opcode11 = master_opcode[:11].encode()
