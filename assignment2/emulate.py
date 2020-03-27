@@ -1,7 +1,6 @@
 import sys
 
 from helpers import hexdump, how_to_read_mem_stack_table
-from driver import machine_state
 
 
 def ex_add(instruction):
@@ -44,7 +43,7 @@ def ex_cbz(instruction):
     print("CBZ")
 
 
-def ex_dump(start=0):
+def ex_dump(machine_state, start=0):
     machine_state.print_all_registers(include_conditional=True)
     how_to_read_mem_stack_table()
     print("Memory:\n")
@@ -112,7 +111,7 @@ def ex_prnl():
     print("\n")
 
 
-def ex_prnt():
+def ex_prnt(machine_state):
     print("PRNT")
     machine_state.print_all_registers(include_conditional=True)
 
@@ -165,13 +164,13 @@ def ex_umulh(instruction):
     print("UMULH NOT IMPLEMENTED")
 
 
-def execute_assembly(binary_instructions, filename):
+def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
     # TODO - remove next 3 lines
     machine_state.print_program()
-    ex_dump()
+    ex_dump(machine_state)
     exit(1)
 
     for instruction in binary_instructions:
@@ -197,7 +196,7 @@ def execute_assembly(binary_instructions, filename):
         elif name == "CBZ":
             ex_cbz(instruction)
         elif name == "DUMP":
-            ex_dump()
+            ex_dump(machine_state)
         elif name == "EOR":
             ex_eor(instruction)
         elif name == "EORI":
@@ -225,7 +224,7 @@ def execute_assembly(binary_instructions, filename):
         elif name == "PRNL":
             ex_prnl()
         elif name == "PRNT":
-            ex_prnt()
+            ex_prnt(machine_state)
         elif name == "SDIV":
             ex_sdiv(instruction)
         elif name == "SMULH":

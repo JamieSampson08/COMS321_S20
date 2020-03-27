@@ -1,17 +1,24 @@
+import binascii
+import sys
+
 from formatting import FormatType
 from instruction import Instruction
 from directory import instruct_dir, conditions
-from driver import machine_state
 
 
-def decode(filename):
+def decode(filename, machine_state):
     binary_instructions = []
     with open(filename, "rb") as file:
         while True:
             raw_bytes = file.read(4)
+            # print(raw_bytes)
 
             # raw bytes to int
             int_val = int.from_bytes(raw_bytes, byteorder='big')
+            # print(hex(int_val))
+            print(hex(int_val).isdigit())
+            # print(bin(int_val).isascii())
+
             if int_val == 0:
                 break
 
