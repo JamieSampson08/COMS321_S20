@@ -1,7 +1,7 @@
 ADD X1, X2, X3
 ADDI X1, X2, #20
 AND X1, X2, X3
-ANDI X1, X2, X3
+ANDI X1, X2, #3
 B end
 B.EQ end
 B.NE end
@@ -19,8 +19,8 @@ B.GT end
 B.LE end
 BL end
 BR X30
-CBNZ  X1, #25
-CBZ X1, #25
+CBNZ  X1, end
+CBZ X1, end
 DUMP
 EOR X1, X2, X3
 EORI X1, X2, #10
@@ -33,15 +33,15 @@ LSL X1, X2, #10
 LSR X1, X2, #10
 MUL X1, X2, X3
 ORR X1, X2, X3
-ORRI X1, X2, X3
+ORRI X1, X2, #3
 PRNL
-PRNT
+PRNT X3
 SDIV X1, X2, X3
 SMULH X1, X2, X3
 STUR X1, [X2, #40]
 STURB X1, [X2, #40]
 STURH X1, [X2, #40]
-STURW X1, [X2, #40]
+// STURW X1, [X2, #40]
 SUB X1, X2, X3
 SUBI X1, X2, #20
 SUBIS X1, X2, #20
@@ -49,4 +49,4 @@ SUBS X1, X2, X3
 UDIV X1, X2, X3
 UMULH X1, X2, X3
 
-end
+end:
