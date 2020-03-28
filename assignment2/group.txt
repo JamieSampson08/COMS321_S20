@@ -8,3 +8,4 @@ IDE: PyCharm
 
 TODO:
 - write all functions for instructions
+- hexdump function

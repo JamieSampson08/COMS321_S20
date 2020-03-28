@@ -117,7 +117,7 @@ instruct_dir = {
         "opcode": b'10111000100',  # Load Signed Word Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"], # Rt = [Rn + DTAddr]
-        "assembly": "Rt, Rn, [dtaddr]",
+        "assembly": "Rt, [Rn, dtaddr]",
     },
     "LSL": {
         "opcode": b"11010011011",  # Logical Shift Left
@@ -185,13 +185,13 @@ instruct_dir = {
         "opcode": b'00111000000',  # Store Byte Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
-        "assembly": "Rt, Rn, dtaddr",
+        "assembly": "Rt, [Rn, dtaddr]",
     },
     "STURH": {
         "opcode": b'01111000000',  # Store Half Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rt", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
-        "assembly": "Rt, Rn, dtaddr",
+        "operation": ["Rt", "dtaddr", "Rn"],  # [Rn + DTAddr] = Rt
+        "assembly": "Rt, [Rn, dtaddr]",
     },
     "STURW": {
         "opcode": b"10111000000",  # Store Word Unscaled Offset

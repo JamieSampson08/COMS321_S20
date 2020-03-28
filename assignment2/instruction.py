@@ -44,64 +44,87 @@ class Instruction:
         """
         start_offset = self.opcode_len  # start location in 32 bits
 
-        for val in values:
-            if "opcode" in val:
+        for attribute in values:
+            if "opcode" in attribute:
                 continue
 
-            byte_len = format_values[val]  # length of format value
+            byte_len = format_values[attribute]  # length of format value
             offset = start_offset + byte_len  # end location in 32 bits
             binary_val = master_opcode[start_offset:offset]  # take the bits between the two values
             start_offset = offset  # set the new start point to the end point
 
-            if val == "shamt":
+            if attribute == "shamt":
                 self.shamt = binary_val
-            elif val == "Rn":
+            elif attribute == "Rn":
                 self.Rn = binary_val
-            elif val == "Rd":
+            elif attribute == "Rd":
                 self.Rd = binary_val
-            elif val == "Rt":
+            elif attribute == "Rt":
                 self.Rt = binary_val
-            elif val == "Rm":
+            elif attribute == "Rm":
                 self.Rm = binary_val
-            elif val == "aluimm":
+            elif attribute == "aluimm":
                 self.aluimm = binary_val
-            elif val == "braddr":  # signed
+            elif attribute == "braddr":  # signed
                 self.braddr = binary_val
-            elif val == "dtaddr":  # signed
+            elif attribute == "dtaddr":  # signed
                 self.dtaddr = binary_val
-            elif val == "condaddr":  # signed
+            elif attribute == "condaddr":  # signed
                 self.condaddr = binary_val
-            elif val == "op":
+            elif attribute == "op":
                 self.op = binary_val
             else:
-                print("{} is not a valid format value".format(val))
+                print("{} is not a valid format value".format(attribute))
 
-    def get_format_value(self, value):
+    def get_format_value(self, attribute):
         """
         Returns the contents of an instruction's given value
-        :param value: the value you are wanting from the instruction
+        :param attribute: the value you are wanting from the instruction
         :return:
         """
-        if value == "shamt":
+        if attribute == "shamt":
             return self.shamt
-        if value == "Rn":
+        if attribute == "Rn":
             return self.Rn
-        if value == "Rd":
+        if attribute == "Rd":
             return self.Rd
-        if value == "Rt":
+        if attribute == "Rt":
             return self.Rt
-        if value == "Rm":
+        if attribute == "Rm":
             return self.Rm
-        if value == "aluimm":
+        if attribute == "aluimm":
             return self.aluimm
-        if value == "braddr":
+        if attribute == "braddr":
             return self.braddr
-        if value == "dtaddr":
+        if attribute == "dtaddr":
             return self.dtaddr
-        if value == "condaddr":
+        if attribute == "condaddr":
             return self.condaddr
-        if value == "op":
+        if attribute == "op":
             return self.op
 
         print("Invalid Instruction Attribute")
         return -1
+
+    def update_value(self, attribute, value):
+        if attribute == "shamt":
+            self.shamt = value
+        if attribute == "Rn":
+            self.Rn = value
+        if attribute == "Rd":
+            self.Rd = value
+        if attribute == "Rt":
+            self.Rt = value
+        if attribute == "Rm":
+            self.Rm = value
+        if attribute == "aluimm":
+            self.aluimm = value
+        if attribute == "braddr":
+            self.braddr = value
+        if attribute == "dtaddr":
+            self.dtaddr = value
+        if attribute == "condaddr":
+            self.condaddr = value
+        if attribute == "op":
+            self.op = value
+

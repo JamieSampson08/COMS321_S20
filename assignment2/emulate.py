@@ -3,43 +3,43 @@ import sys
 from helpers import hexdump, how_to_read_mem_stack_table
 
 
-def ex_add(instruction):
+def ex_add(instruction, machine_state):
     print("ADD")
 
 
-def ex_addi(instruction):
+def ex_addi(instruction, machine_state):
     print("ADDI")
 
 
-def ex_and(instruction):
+def ex_and(instruction, machine_state):
     print("AND")
 
 
-def ex_andi(instruction):
+def ex_andi(instruction, machine_state):
     print("ANDI")
 
 
-def ex_b(instruction):
+def ex_b(instruction, machine_state):
     print("B")
 
 
-def ex_b_cond(instruction):
+def ex_b_cond(instruction, machine_state):
     print("B.cond")
 
 
-def ex_bl(instruction):
+def ex_bl(instruction, machine_state):
     print("BL")
 
 
-def ex_br(instruction):
+def ex_br(instruction, machine_state):
     print("BR")
 
 
-def ex_cbnz(instruction):
+def ex_cbnz(instruction, machine_state):
     print("CBNZ")
 
 
-def ex_cbz(instruction):
+def ex_cbz(instruction, machine_state):
     print("CBZ")
 
 
@@ -56,11 +56,11 @@ def ex_dump(machine_state, start=0):
     exit(1)
 
 
-def ex_eor(instruction):
+def ex_eor(instruction, machine_state):
     print("EOR")
 
 
-def ex_eori(instruction):
+def ex_eori(instruction, machine_state):
     print("EORI")
 
 
@@ -70,39 +70,39 @@ def ex_halt(machine_state):
     exit()
 
 
-def ex_ldur(instruction):
+def ex_ldur(instruction, machine_state):
     print("LDUR")
 
 
-def ex_ldurb(instruction):
+def ex_ldurb(instruction, machine_state):
     print("LDURB NOT IMPLEMENTED")
 
 
-def ex_ldurh(instruction):
+def ex_ldurh(instruction, machine_state):
     print("LDURH NOT IMPLEMENTED")
 
 
-def ex_ldursw(instruction):
+def ex_ldursw(instruction, machine_state):
     print("LDRSW NOT IMPLEMENTED")
 
 
-def ex_lsl(instruction):
+def ex_lsl(instruction, machine_state):
     print("LSL")
 
 
-def ex_lsr(instruction):
+def ex_lsr(instruction, machine_state):
     print("LSR")
 
 
-def ex_mul(instruction):
+def ex_mul(instruction, machine_state):
     print("MUL")
 
 
-def ex_orr(instruction):
+def ex_orr(instruction, machine_state):
     print("ORR")
 
 
-def ex_orri(instruction):
+def ex_orri(instruction, machine_state):
     print("ORRI")
 
 
@@ -116,131 +116,145 @@ def ex_prnt(machine_state):
     machine_state.print_all_registers(include_conditional=True)
 
 
-def ex_sdiv(instruction):
+def ex_sdiv(instruction, machine_state):
     print("SDIV NOT IMPLEMENTED")
 
 
-def ex_smulh(instruction):
+def ex_smulh(instruction, machine_state):
     print("SMULH NOT IMPLEMENTED")
 
 
-def ex_stur(instruction):
+def ex_stur(instruction, machine_state):
     print("STUR")
 
 
-def ex_sturh(instruction):
+def ex_sturh(instruction, machine_state):
     print("STURH NOT IMPLEMENTED")
 
 
-def ex_sturw(instruction):
+def ex_sturw(instruction, machine_state):
     print("STURW NOT IMPLEMENTED")
 
 
-def ex_sturw(instruction):
+def ex_sturw(instruction, machine_state):
     print("STURW NOT IMPLEMENTED")
 
 
-def ex_sub(instruction):
+def ex_sub(instruction, machine_state):
     print("SUB")
 
 
-def ex_subi(instruction):
+def ex_subi(instruction, machine_state):
     print("SUBI")
 
 
-def ex_subis(instruction):
+def ex_subis(instruction, machine_state):
     print("SUBIS")
 
 
-def ex_subs(instruction):
+def ex_subs(instruction, machine_state):
     print("SUBS")
 
 
-def ex_udiv(instruction):
+def ex_udiv(instruction, machine_state):
     print("UDIV NOT IMPLEMENTED")
 
 
-def ex_umulh(instruction):
+def ex_umulh(instruction, machine_state):
     print("UMULH NOT IMPLEMENTED")
 
 
 def execute_assembly(binary_instructions, filename, machine_state):
+    pseudo_instructions = ["PRNL", "PRNT", "HALT", "DUMP"]
+
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
     for instruction in binary_instructions:
         name = instruction.name
+
+        # special instruction that don't require both instruction & machine state
+        if name in pseudo_instructions:
+            if name == "PRNL":
+                ex_prnl()
+            elif name == "PRNT":
+                ex_prnt(machine_state)
+            elif name == "HALT":
+                ex_halt(machine_state)
+            elif name == "DUMP":
+                ex_dump(machine_state)
+            continue
+
+        # since all the functions require the instruction & machine state
+        # create a variable to hold what function to call and then make
+        # one call with necessary parameters
+        func = None
+
         if name == "ADD":
-            ex_add(instruction)
+            func = ex_add
         elif name == "ADDI":
-            ex_addi(instruction)
+            func = ex_addi
         elif name == "AND":
-            ex_and(instruction)
+            func = ex_and
         elif name == "ANDI":
-            ex_addi(instruction)
+            func = ex_addi
         elif name == "B":
-            ex_b(instruction)
+            func = ex_b
         elif name == "B.cond":
-            ex_b_cond(instruction)
+            func = ex_b_cond
         elif name == "BL":
-            ex_bl(instruction)
+            func = ex_bl
         elif name == "BR":
-            ex_br(instruction)
+            func = ex_br
         elif name == "CBNZ":
-            ex_cbnz(instruction)
+            func = ex_cbnz
         elif name == "CBZ":
-            ex_cbz(instruction)
-        elif name == "DUMP":
-            ex_dump(machine_state)
+            func = ex_cbz
         elif name == "EOR":
-            ex_eor(instruction)
+            func = ex_eor
         elif name == "EORI":
-            ex_eori(instruction)
-        elif name == "HALT":
-            ex_halt(machine_state)
+            func = ex_eori
         elif name == "LDUR":
-            ex_ldur(instruction)
+            func = ex_ldur
         elif name == "LDURB":
-            ex_ldurb(instruction)
+            func = ex_ldurb
         elif name == "LDURH":
-            ex_ldurh(instruction)
+            func = ex_ldurh
         elif name == "LDURSW":
-            ex_ldursw(instruction)
+            func = ex_ldursw
         elif name == "LSL":
-            ex_lsl(instruction)
+            func = ex_lsl
         elif name == "LSR":
-            ex_lsr(instruction)
+            func = ex_lsr
         elif name == "MUL":
-            ex_mul(instruction)
+            func = ex_mul
         elif name == "ORR":
-            ex_orr(instruction)
+            func = ex_orr
         elif name == "ORRI":
-            ex_orri(instruction)
-        elif name == "PRNL":
-            ex_prnl()
-        elif name == "PRNT":
-            ex_prnt(machine_state)
+            func = ex_orri
         elif name == "SDIV":
-            ex_sdiv(instruction)
+            func = ex_sdiv
         elif name == "SMULH":
-            ex_smulh(instruction)
+            func = ex_smulh
         elif name == "STUR":
-            ex_stur(instruction)
+            func = ex_stur
         elif name == "STURW":
-            ex_sturw(instruction)
+            func = ex_sturw
         elif name == "SUB":
-            ex_sub(instruction)
+            func = ex_sub
         elif name == "SUBI":
-            ex_subi(instruction)
+            func = ex_subi
         elif name == "SUBIS":
-            ex_subis(instruction)
+            func = ex_subis
         elif name == "SUBS":
-            ex_subs(instruction)
+            func = ex_subs
         elif name == "UDIV":
-            ex_udiv(instruction)
+            func = ex_udiv
         elif name == "UMULH":
-            ex_umulh(instruction)
+            func = ex_umulh
         else:
-            print("'{}' not found".format(name))
+            print("Error: '{}' not found".format(name))
+            exit(1)
+        func(instruction, machine_state)
         machine_state.PC += 4
     return machine_state

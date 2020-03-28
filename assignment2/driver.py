@@ -1,6 +1,7 @@
 import sys
-from emulate import execute_assembly
+
 from decode import decode
+from emulate import execute_assembly
 from machine import Machine
 
 
@@ -10,7 +11,7 @@ def main(argv):
     print("Decoding File: {}\n".format(filename))
     binary_instructions = decode(filename)
     print("Executing Instructions:")
-    # machine_state = execute_assembly(binary_instructions, filename, machine_state)
+    machine_state = execute_assembly(binary_instructions, filename, machine_state)
 
 
 if __name__ == "__main__":

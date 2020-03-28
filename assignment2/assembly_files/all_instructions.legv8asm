@@ -46,7 +46,7 @@ SUB X1, X2, X3
 SUBI X1, X2, #20
 SUBIS X1, X2, #20
 SUBS X1, X2, X3
-UDIV X1, X2, X3
+UDIV X1, X2, X3 // or SDIV since they have the same opcode
 UMULH X1, X2, X3
 
 end:

@@ -18,6 +18,7 @@ def decode(filename):
             # int to binary string
             master_opcode = format(int_val, "b")  # returns a string of format 10010001 (8 bits)
 
+            # converting int to binary drops the leading zeros, so this adds them back
             if len(master_opcode) != 32:
                 len_diff = 32 - len(master_opcode)
                 zero_padding = "0" * len_diff
@@ -41,8 +42,8 @@ def decode(filename):
             find_instruction_name(new_instruction)
 
             if new_instruction.name is None:
-                print("Opcode Does Not Exist")
-                return
+                print("Error: Opcode Does Not Exist")
+                exit(1)
 
             fill_format_values(master_opcode, new_instruction)
             binary_instructions.append(new_instruction)
@@ -145,6 +146,9 @@ def construct_assembly(instruction):
         else:
             # registers
             assembly = assembly.replace(op, "X" + str(decimal_value))
+
+        # replace binary value of attribute with decimal value
+        instruction.update_value(op, decimal_value)
     instruction.add_properties(assembly=assembly)
-    print(assembly)
+    # print(instruction.assembly)
 

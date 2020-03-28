@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assembly_files/all_instructions.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/all_instructions.legv8asm.machine" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testedInstructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/all_instructions.legv8asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/group.txt" beforeDir="false" afterPath="$PROJECT_DIR$/group.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine_files/all_instructions.legv8asm" beforeDir="false" afterPath="$PROJECT_DIR$/assembly_files/all_instructions.legv8asm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +45,8 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/machine_files" />
-      <recent name="$PROJECT_DIR$/machine_files/tested" />
       <recent name="$PROJECT_DIR$/assembly_files" />
+      <recent name="$PROJECT_DIR$/machine_files/tested" />
       <recent name="$PROJECT_DIR$/scripts" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -183,6 +189,10 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="426" y="115" width="683" height="729" key="find.popup/0.0.1536.960@0.0.1536.960" timestamp="1585361596948" />
+    <state x="530" y="118" key="refactoring.ChangeSignatureDialog" timestamp="1585370784858">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state x="530" y="118" key="refactoring.ChangeSignatureDialog/0.0.1536.960@0.0.1536.960" timestamp="1585370784858" />
     <state x="46" y="211" width="670" height="676" key="search.everywhere.popup" timestamp="1585190639357">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
