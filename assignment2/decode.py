@@ -16,6 +16,7 @@ def decode(filename, machine_state):
             int_val = int.from_bytes(raw_bytes, byteorder='big')
 
             if int_val == 0:
+                print("int_val == 0")
                 break
 
             # int to binary string
@@ -24,7 +25,6 @@ def decode(filename, machine_state):
 
             opcode6 = master_opcode[:6].encode()
             opcode8 = master_opcode[:8].encode()
-            print(opcode8)
             opcode9 = master_opcode[:9].encode()
             opcode10 = master_opcode[:10].encode()
             opcode11 = master_opcode[:11].encode()

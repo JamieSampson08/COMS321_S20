@@ -4,3 +4,5 @@ ADDI X7, XZR, #0
 
 endCompare:
     B return
+
+return:

@@ -6,8 +6,10 @@ Test Files
 branch01 : label (EMF)
 branch02 : `BR LR`
 branch03 :  `B end`
+branch04 :
+branch05 : B.GT
 comments01 : `/` (EMF)
-comments02 : `/` w/ text (EMF)
+comments02 : `/ X10` (EMF)
 comments03 : 1 line assembly + 1 line comment w/ text
 
 
