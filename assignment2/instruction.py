@@ -65,11 +65,11 @@ class Instruction:
                 self.Rm = binary_val
             elif val == "aluimm":
                 self.aluimm = binary_val
-            elif val == "braddr":
+            elif val == "braddr":  # signed
                 self.braddr = binary_val
-            elif val == "dtaddr":
+            elif val == "dtaddr":  # signed
                 self.dtaddr = binary_val
-            elif val == "condaddr":
+            elif val == "condaddr":  # signed
                 self.condaddr = binary_val
             elif val == "op":
                 self.op = binary_val

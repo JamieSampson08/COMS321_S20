@@ -14,7 +14,6 @@ class Machine:
         self.PC = 0
         self.filename = None
         self.binary_instructions = None
-        self.branch_names = {}
 
         self.registers = []
         self.condition_registers = []

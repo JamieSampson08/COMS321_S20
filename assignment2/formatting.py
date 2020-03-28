@@ -15,7 +15,7 @@ class FormatType(Enum):
         "order": ["opcode6", "braddr"],
     }
     CB = {
-        "order": ["opcode11", "condaddr", "Rt"],
+        "order": ["opcode8", "condaddr", "Rt"],
     }
 
 
@@ -29,6 +29,6 @@ format_values = {
     "aluimm": 12,
     "braddr": 26,  # signed
     "dtaddr": 9,  # signed
-    "condaddr": 16,  # signed
+    "condaddr": 19,  # signed
     "op": 2,
 }

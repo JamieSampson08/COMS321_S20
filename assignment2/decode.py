@@ -1,12 +1,9 @@
-import binascii
-import sys
-
 from formatting import FormatType
 from instruction import Instruction
 from directory import instruct_dir, conditions
 
 
-def decode(filename, machine_state):
+def decode(filename):
     binary_instructions = []
     with open(filename, "rb") as file:
         while True:
@@ -16,12 +13,15 @@ def decode(filename, machine_state):
             int_val = int.from_bytes(raw_bytes, byteorder='big')
 
             if int_val == 0:
-                print("int_val == 0")
                 break
 
             # int to binary string
             master_opcode = format(int_val, "b")  # returns a string of format 10010001 (8 bits)
-            print(len(master_opcode))
+
+            if len(master_opcode) != 32:
+                len_diff = 32 - len(master_opcode)
+                zero_padding = "0" * len_diff
+                master_opcode = zero_padding + master_opcode
 
             opcode6 = master_opcode[:6].encode()
             opcode8 = master_opcode[:8].encode()
@@ -112,6 +112,7 @@ def construct_assembly(instruction):
 
     # format values that start with # instead of X
     integer_offsets = ["dtaddr", "shamt", "aluimm"]
+    signed_values = ["braddr", "dtaddr", "condaddr"]
 
     dir_instruct = instruct_dir[instruction.name]
     # build the skeleton assembly
@@ -121,15 +122,28 @@ def construct_assembly(instruction):
         # convert binary to int
         binary_value = instruction.get_format_value(op)
         decimal_value = int(binary_value, 2)
-        # handle B.cond weirdness
+
+        # if binary is supposed to be signed, take the two's compliment
+        if op in signed_values:
+            if int(binary_value[0]) == 1:
+                decimal_value -= 2 ** len(binary_value)
+
+        # handle .cond of B.cond instructions
         if instruction.name == "B.cond" and op == "Rt":
             # dictionary takes in hex string
             condition = conditions[hex(decimal_value)]
             new_instruct_name = "B.{}".format(condition)
             assembly = assembly.replace(instruction.name, new_instruct_name)
-        elif op in integer_offsets:
+
+        # formatting for assembly
+        if op in integer_offsets:
+            # int values
             assembly = assembly.replace(op, "#" + str(decimal_value))
+        elif op in signed_values:
+            # branch addresses
+            assembly = assembly.replace(op, str(decimal_value))
         else:
+            # registers
             assembly = assembly.replace(op, "X" + str(decimal_value))
     instruction.add_properties(assembly=assembly)
     print(assembly)

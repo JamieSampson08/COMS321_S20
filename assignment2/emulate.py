@@ -64,9 +64,9 @@ def ex_eori(instruction):
     print("EORI")
 
 
-def ex_halt():
+def ex_halt(machine_state):
     print("HALT")
-    ex_dump()
+    ex_dump(machine_state)
     exit()
 
 
@@ -168,11 +168,6 @@ def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
-    # TODO - remove next 3 lines
-    machine_state.print_program()
-    ex_dump(machine_state)
-    exit(1)
-
     for instruction in binary_instructions:
         name = instruction.name
         if name == "ADD":
@@ -202,7 +197,7 @@ def execute_assembly(binary_instructions, filename, machine_state):
         elif name == "EORI":
             ex_eori(instruction)
         elif name == "HALT":
-            ex_halt()
+            ex_halt(machine_state)
         elif name == "LDUR":
             ex_ldur(instruction)
         elif name == "LDURB":
