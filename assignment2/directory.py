@@ -62,13 +62,13 @@ instruct_dir = {
     "CBNZ": {
         "opcode": b'10110101',  # Compare & Branch if Not Zero
         "format_type": FormatType.CB,
-        "operation": ["Rt", "condaddr"],  # if(Rt != 0) -> PC = PC + CondBranchAddr
+        "operation": ["Rt", "condaddr"],  # if(Rt != 0) -> PC = PC + CondBranchAddr + 4
         "assembly": "Rt, condaddr"
     },
     "CBZ": {
         "opcode": b'10110100',  # Compare & Branch if Zero
         "format_type": FormatType.CB,
-        "operation": ["Rt", "condaddr"],  # if (Rt == 0) -> PC = PC + CondBranchAddr
+        "operation": ["Rt", "condaddr"],  # if (Rt == 0) -> PC = PC + CondBranchAddr + 4
         "assembly": "Rt, condaddr",
     },
     "DUMP": {
@@ -104,19 +104,19 @@ instruct_dir = {
     "LDURB": {
         "opcode": b'00111000010',  # Load Byte Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {56'b0, [Rn + DTAddr](7:0)}
+        "operation": ["Rt", "Rn", "dtaddr"],  # Rt = [Rn + DTAddr]
         "assembly": "Rt, [Rn, dtaddr]",
     },
     "LDURH": {
         "opcode": b'01111000010',  # Load Half Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {48'b0, [Rn + DTAddr](15:0)}
+        "operation": ["Rt", "Rn", "dtaddr"],  # Rt = [Rn + DTAddr]
         "assembly": "Rt, [Rn, dtaddr]",
     },
     "LDURSW": {
         "opcode": b'10111000100',  # Load Signed Word Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rt", "Rn", "dtaddr"],  # Rt = {32{[Rn + DTAddr][31]}, [Rn + DTAddr](31:0)}
+        "operation": ["Rt", "Rn", "dtaddr"], # Rt = [Rn + DTAddr]
         "assembly": "Rt, Rn, [dtaddr]",
     },
     "LSL": {
@@ -135,7 +135,7 @@ instruct_dir = {
         "opcode": b"10011011000",  # Multiply
         "format_type": FormatType.R,
         "shamt": b"011111",
-        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(63:0)
+        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)
         "assembly": "Rd, Rn, Rm",
     },
     "ORR": {
@@ -172,7 +172,7 @@ instruct_dir = {
     "SMULH": {
         "opcode": b"10011011010",  # Signed Multiply High
         "format_type": FormatType.R,
-        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(127:64)
+        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)
         "assembly": "Rd, Rn, Rm",
     },
     "STUR": {
@@ -184,19 +184,19 @@ instruct_dir = {
     "STURB":{
         "opcode": b'00111000000',  # Store Byte Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rn", "dtaddr", "Rt"],  # Rn + DTAddr(7:0) = Rt(7:0)
+        "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, Rn, dtaddr",
     },
     "STURH": {
         "opcode": b'01111000000',  # Store Half Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rt", "dtaddr", "Rt"],  # Rn + DTAddr = Rt(15:0)
+        "operation": ["Rt", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, Rn, dtaddr",
     },
     "STURW": {
         "opcode": b"10111000000",  # Store Word Unscaled Offset
         "format_type": FormatType.D,
-        "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr](31:0) = Rt(31:0)
+        "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
 
     },
@@ -234,7 +234,7 @@ instruct_dir = {
     "UMULH": {
         "opcode": b"10011011110",  # Unsigned Multiply High
         "format_type": FormatType.R,
-        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)(127:64)
+        "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)
         "assembly": "Rd, Rn, Rm",
     },
 }

@@ -3,20 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/formatting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/branch01.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/branch01.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/branch02.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/branch02.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/comments01.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/comments01.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/comments02.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/comments02.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/comments03.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/comments03.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/tested/q3.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/q3.legv8asm.machine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testedInstructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testedInstructions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testedInstructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/all_instructions.legv8asm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
