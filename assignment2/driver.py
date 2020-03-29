@@ -10,7 +10,7 @@ def main(argv):
     filename = argv[0]
     print("Decoding File: {}\n".format(filename))
     binary_instructions = decode(filename)
-    print("Executing Instructions:")
+    print("\nExecuting Instructions:")
     machine_state = execute_assembly(binary_instructions, filename, machine_state)
 
 

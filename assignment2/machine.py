@@ -1,19 +1,25 @@
 from register import Register
+from constants import STACK_SIZE, MEMORY_SIZE
 
 
 class Machine:
     def __init__(self):
         # subtract from stack
-        self.stack = bytes(512)
-        self.stack_size = 512
+        self.stack = "{:0512b}".format(0)  # string binary representation of all data in stack
+        self.stack_size = STACK_SIZE
+        # self.stack_location held in register 28's data as int
 
         # add to memory
-        self.memory = bytes(0)
-        self.memory_size = 4096
+        self.memory = "{:04096b}".format(0)  # string binary representation of all data in memory
+        self.memory_size = MEMORY_SIZE
+        self.memory_location = 0
 
-        self.PC = 0
         self.filename = None
+        self.PC = 0  # current instruction index
         self.binary_instructions = None
+        self.instructions_executed = 0
+        self.loads_issued = 0
+        self.stores_issued = 0
 
         self.registers = []
         self.condition_registers = []

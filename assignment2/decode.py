@@ -1,6 +1,7 @@
 from formatting import FormatType
 from instruction import Instruction
-from directory import instruct_dir, conditions
+from directory import instruct_dir
+from conditionals import CONDITIONS, Conditional
 
 
 def decode(filename):
@@ -132,8 +133,9 @@ def construct_assembly(instruction):
         # handle .cond of B.cond instructions
         if instruction.name == "B.cond" and op == "Rt":
             # dictionary takes in hex string
-            condition = conditions[hex(decimal_value)]
+            condition = CONDITIONS[hex(decimal_value)]
             new_instruct_name = "B.{}".format(condition)
+            instruction.conditional = Conditional(condition)
             assembly = assembly.replace(instruction.name, new_instruct_name)
 
         # formatting for assembly

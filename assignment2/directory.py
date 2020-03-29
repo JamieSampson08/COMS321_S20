@@ -238,21 +238,3 @@ instruct_dir = {
         "assembly": "Rd, Rn, Rm",
     },
 }
-
-# B.cond condition extensions mapping
-conditions = {
-    '0x0': "EQ",
-    '0x1': "NE",
-    '0x2': "HS",
-    '0x3': "LO",
-    '0x4': "MI",
-    '0x5': "PL",
-    '0x6': "VS",
-    '0x7': "VC",
-    '0x8': "HI",
-    '0x9': "LS",
-    '0xa': "GE",
-    '0xb': "LT",
-    '0xc': "GT",
-    '0xd': "LE",
-}

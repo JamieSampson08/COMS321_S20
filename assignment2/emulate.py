@@ -3,12 +3,23 @@ import sys
 from helpers import hexdump, how_to_read_mem_stack_table
 
 
+def check_out_of_bounds(machine_state):
+    if machine_state.registers[28].data < 8 or machine_state.PC > 4088:
+        print("Error: Attempting to access out of bounds address")
+        ex_dump(machine_state)
+
+
 def ex_add(instruction, machine_state):
     print("ADD")
 
 
 def ex_addi(instruction, machine_state):
     print("ADDI")
+    current_value = machine_state.registers[instruction.Rn].data
+    new_value = current_value + instruction.aluimm
+    binary_rep = "{:08b}".format(new_value)
+    address = machine_state.memory_location
+    machine_state.registers[instruction.Rd].data = address
 
 
 def ex_and(instruction, machine_state):
@@ -72,18 +83,22 @@ def ex_halt(machine_state):
 
 def ex_ldur(instruction, machine_state):
     print("LDUR")
+    machine_state.loads_issued += 1
 
 
 def ex_ldurb(instruction, machine_state):
     print("LDURB NOT IMPLEMENTED")
+    machine_state.loads_issued += 1
 
 
 def ex_ldurh(instruction, machine_state):
     print("LDURH NOT IMPLEMENTED")
+    machine_state.loads_issued += 1
 
 
 def ex_ldursw(instruction, machine_state):
     print("LDRSW NOT IMPLEMENTED")
+    machine_state.loads_issued += 1
 
 
 def ex_lsl(instruction, machine_state):
@@ -126,18 +141,22 @@ def ex_smulh(instruction, machine_state):
 
 def ex_stur(instruction, machine_state):
     print("STUR")
+    machine_state.stores_issued += 1
 
 
 def ex_sturh(instruction, machine_state):
     print("STURH NOT IMPLEMENTED")
+    machine_state.stores_issued += 1
 
 
 def ex_sturw(instruction, machine_state):
     print("STURW NOT IMPLEMENTED")
+    machine_state.stores_issued += 1
 
 
 def ex_sturw(instruction, machine_state):
     print("STURW NOT IMPLEMENTED")
+    machine_state.stores_issued += 1
 
 
 def ex_sub(instruction, machine_state):
@@ -171,9 +190,10 @@ def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.binary_instructions = binary_instructions
 
     # machine_state.print_program()
-    exit(1)
+    # exit(1)
 
     for instruction in binary_instructions:
+        check_out_of_bounds(machine_state)
         name = instruction.name
 
         # special instruction that don't require both instruction & machine state
@@ -259,5 +279,6 @@ def execute_assembly(binary_instructions, filename, machine_state):
             print("Error: '{}' not found".format(name))
             exit(1)
         func(instruction, machine_state)
-        machine_state.PC += 4
+        machine_state.instructions_executed += 1
+        machine_state.PC += 1
     return machine_state

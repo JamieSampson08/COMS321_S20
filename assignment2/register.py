@@ -1,3 +1,6 @@
+from constants import STACK_SIZE
+
+
 class Register:
     def __init__(self, number, is_conditional=False):
         self.data = 0
@@ -17,10 +20,10 @@ class Register:
             self.use = "Saved"
         elif number == 28:
             self.use = "SP"  # Stack Pointer
-            self.data = 512
+            self.data = STACK_SIZE
         elif number == 29:
             self.use = "FP"  # Frame Pointer
-            self.data = 512
+            self.data = STACK_SIZE
         elif number == 30:
             self.use = "LR"  # Return Address/Link Register
         elif number == 31:
