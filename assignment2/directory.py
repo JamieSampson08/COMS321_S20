@@ -181,7 +181,7 @@ instruct_dir = {
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
     },
-    "STURB":{
+    "STURB": {
         "opcode": b'00111000000',  # Store Byte Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt

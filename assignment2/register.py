@@ -36,8 +36,13 @@ class Register:
 
     def print_register(self):
         use_info = "  "
-        if self.use in ["XZR", "SP", "FP", "LR", "IP1", "IP0"]:
-            use_info = "({})".format(self.use)
-        information = "{:>5} X{:<3}: {:018x} ({:d})".format(use_info, self.reg_number, self.data, self.data)
+        if self.is_conditional:
+            use_info = "({})".format(self.data.name)
+            data = self.data.flag
+        else:
+            data = self.data
+            if self.use in ["XZR", "SP", "FP", "LR", "IP1", "IP0"]:
+                use_info = "({})".format(self.use)
+        information = "{:>5} X{:<3}: {:018x} ({:d})".format(use_info, self.reg_number, data, data)
         print(information)
 

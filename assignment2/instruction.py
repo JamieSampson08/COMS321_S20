@@ -29,7 +29,6 @@ class Instruction:
         self.condaddr = None
 
         self.format_type = None  # FormatType Enum
-        self.conditional = None  # Class Conditional, only applicable to B.cond instructions
 
     def add_properties(self, **kwargs):
         for key, value in kwargs.items():

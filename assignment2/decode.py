@@ -135,7 +135,6 @@ def construct_assembly(instruction):
             # dictionary takes in hex string
             condition = CONDITIONS[hex(decimal_value)]
             new_instruct_name = "B.{}".format(condition)
-            instruction.conditional = Conditional(condition)
             assembly = assembly.replace(instruction.name, new_instruct_name)
 
         # formatting for assembly

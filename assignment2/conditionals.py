@@ -36,7 +36,7 @@ class Conditional:
             if self.name in conditions:
                 self.type = condition_type
                 return
-        print("Error: Condition name does not exist")
+        # print("{} is always 0".format(self.name))  # DEBUG
 
     def reset_flag(self):
         self.flag = 0

@@ -3,31 +3,52 @@ import sys
 from helpers import hexdump, how_to_read_mem_stack_table
 
 
-def check_out_of_bounds(machine_state):
-    if machine_state.registers[28].data < 8 or machine_state.PC > 4088:
-        print("Error: Attempting to access out of bounds address")
-        ex_dump(machine_state)
-
+NOT_REQUIRED = [
+    "STURB", "STURW", "STURH",
+    "LDURB", "LDURW", "LDURH",
+    "SMULH", "UMULH",
+    "UDIV", "SDIV"
+]
 
 def ex_add(instruction, machine_state):
     print("ADD")
 
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data + rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
+
 
 def ex_addi(instruction, machine_state):
-    print("ADDI")
-    current_value = machine_state.registers[instruction.Rn].data
-    new_value = current_value + instruction.aluimm
-    binary_rep = "{:08b}".format(new_value)
-    address = machine_state.memory_location
-    machine_state.registers[instruction.Rd].data = address
+    print("ADDI")  # Rd = Rn + ALUImm
+
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data + instruction.aluimm
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_and(instruction, machine_state):
     print("AND")
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data & rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_andi(instruction, machine_state):
     print("ANDI")
+
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data & instruction.aluimm
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_b(instruction, machine_state):
@@ -69,10 +90,22 @@ def ex_dump(machine_state, start=0):
 
 def ex_eor(instruction, machine_state):
     print("EOR")
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data ^ rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_eori(instruction, machine_state):
     print("EORI")
+
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data ^ instruction.aluimm
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_halt(machine_state):
@@ -84,6 +117,7 @@ def ex_halt(machine_state):
 def ex_ldur(instruction, machine_state):
     print("LDUR")
     machine_state.loads_issued += 1
+    # TODO
 
 
 def ex_ldurb(instruction, machine_state):
@@ -96,7 +130,7 @@ def ex_ldurh(instruction, machine_state):
     machine_state.loads_issued += 1
 
 
-def ex_ldursw(instruction, machine_state):
+def ex_ldurw(instruction, machine_state):
     print("LDRSW NOT IMPLEMENTED")
     machine_state.loads_issued += 1
 
@@ -104,21 +138,51 @@ def ex_ldursw(instruction, machine_state):
 def ex_lsl(instruction, machine_state):
     print("LSL")
 
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data << instruction.shamt
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
+
 
 def ex_lsr(instruction, machine_state):
     print("LSR")
+
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data >> instruction.shamt
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_mul(instruction, machine_state):
     print("MUL")
 
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data * rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
+
 
 def ex_orr(instruction, machine_state):
     print("ORR")
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data | rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_orri(instruction, machine_state):
     print("ORRI")
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data | instruction.aluimm
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_prnl():
@@ -132,7 +196,16 @@ def ex_prnt(machine_state):
 
 
 def ex_sdiv(instruction, machine_state):
-    print("SDIV NOT IMPLEMENTED")
+    print("SDIV NOT REQUIRED")
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+
+    # TODO - need to convert rn_data & rm_data to binary, take two's compliment and then divide
+
+    new_value = rn_data / rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_smulh(instruction, machine_state):
@@ -141,6 +214,11 @@ def ex_smulh(instruction, machine_state):
 
 def ex_stur(instruction, machine_state):
     print("STUR")
+    machine_state.stores_issued += 1
+
+
+def ex_sturb(instruction, machine_state):
+    print("STURB NOT IMPLEMENTED")
     machine_state.stores_issued += 1
 
 
@@ -154,29 +232,50 @@ def ex_sturw(instruction, machine_state):
     machine_state.stores_issued += 1
 
 
-def ex_sturw(instruction, machine_state):
-    print("STURW NOT IMPLEMENTED")
-    machine_state.stores_issued += 1
-
-
 def ex_sub(instruction, machine_state):
     print("SUB")
+
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+    new_value = rn_data - rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
+    return new_value
 
 
 def ex_subi(instruction, machine_state):
     print("SUBI")
 
+    rn_data = machine_state.registers[instruction.Rn].data
+    new_value = rn_data - instruction.aluimm
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
+    return new_value
+
 
 def ex_subis(instruction, machine_state):
     print("SUBIS")
+    new_value = ex_subi(instruction, machine_state)
+    machine_state.set_conditional_flags(new_value)
 
 
 def ex_subs(instruction, machine_state):
     print("SUBS")
+    new_value = ex_sub(instruction, machine_state)
+    machine_state.set_conditional_flags(new_value)
 
 
 def ex_udiv(instruction, machine_state):
-    print("UDIV NOT IMPLEMENTED")
+    print("UDIV NOT REQUIRED")
+    rn_data = machine_state.registers[instruction.Rn].data
+    rm_data = machine_state.registers[instruction.Rm].data
+
+    new_value = rn_data / rm_data
+    machine_state.registers[instruction.Rd].data = new_value
+
+    machine_state.shift_memory(new_value)
 
 
 def ex_umulh(instruction, machine_state):
@@ -193,7 +292,7 @@ def execute_assembly(binary_instructions, filename, machine_state):
     # exit(1)
 
     for instruction in binary_instructions:
-        check_out_of_bounds(machine_state)
+        machine_state.check_out_of_bounds()
         name = instruction.name
 
         # special instruction that don't require both instruction & machine state
@@ -243,8 +342,8 @@ def execute_assembly(binary_instructions, filename, machine_state):
             func = ex_ldurb
         elif name == "LDURH":
             func = ex_ldurh
-        elif name == "LDURSW":
-            func = ex_ldursw
+        elif name == "LDURW":
+            func = ex_ldurw
         elif name == "LSL":
             func = ex_lsl
         elif name == "LSR":
