@@ -170,6 +170,9 @@ def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
+    # machine_state.print_program()
+    exit(1)
+
     for instruction in binary_instructions:
         name = instruction.name
 

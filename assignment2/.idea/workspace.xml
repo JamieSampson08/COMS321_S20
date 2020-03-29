@@ -3,14 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assembly_files/all_instructions.legv8asm.machine" beforeDir="false" afterPath="$PROJECT_DIR$/machine_files/all_instructions.legv8asm.machine" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group.txt" beforeDir="false" afterPath="$PROJECT_DIR$/group.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_files/all_instructions.legv8asm" beforeDir="false" afterPath="$PROJECT_DIR$/assembly_files/all_instructions.legv8asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/machine_files" />
       <recent name="$PROJECT_DIR$/assembly_files" />
       <recent name="$PROJECT_DIR$/machine_files/tested" />

@@ -1,4 +1,4 @@
-from formatting import format_values
+from formatting import format_values, FormatType
 
 
 class Instruction:
@@ -76,7 +76,7 @@ class Instruction:
             else:
                 print("{} is not a valid format value".format(attribute))
 
-    def get_format_value(self, attribute):
+    def get_value(self, attribute):
         """
         Returns the contents of an instruction's given value
         :param attribute: the value you are wanting from the instruction
@@ -127,4 +127,16 @@ class Instruction:
             self.condaddr = value
         if attribute == "op":
             self.op = value
+
+    def print_values(self):
+        format_obj = FormatType(self.format_type)
+        fill_values = format_obj.value["order"]
+        instruction = "{}:\n".format(self.name)
+        for attribute in fill_values:
+            if "opcode" in attribute:
+                continue
+            val = self.get_value(attribute)
+            attribute_info = "{}({})".format(attribute, str(val))
+            instruction += attribute_info + ' '
+        print(instruction)
 
