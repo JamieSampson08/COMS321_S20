@@ -10,6 +10,7 @@ NOT_REQUIRED = [
     "UDIV", "SDIV"
 ]
 
+
 def ex_add(instruction, machine_state):
     print("ADD")
 
@@ -53,26 +54,47 @@ def ex_andi(instruction, machine_state):
 
 def ex_b(instruction, machine_state):
     print("B")
+    machine_state.PC += instruction.braddr
+    return True
 
 
 def ex_b_cond(instruction, machine_state):
     print("B.cond")
+    result = machine_state.conditional_registers[instruction.Rt].data
+
+    if result:
+        machine_state.PC += instruction.condaddr
+        return True
 
 
 def ex_bl(instruction, machine_state):
     print("BL")
+    machine_state.registers[30] = machine_state.PC + instruction.braddr
+    ex_b(instruction, machine_state)
+    return True
 
 
 def ex_br(instruction, machine_state):
     print("BR")
+    rn_data = machine_state.registers[instruction.Rn].data
+    machine_state.PC = rn_data
+    return True
 
 
 def ex_cbnz(instruction, machine_state):
     print("CBNZ")
+    rt_data = machine_state.registers[instruction.Rt].data
+    if rt_data != 0:
+        machine_state.PC += instruction.condaddr + 1
+        return True
 
 
 def ex_cbz(instruction, machine_state):
     print("CBZ")
+    rt_data = machine_state.registers[instruction.Rt].data
+    if rt_data == 0:
+        machine_state.PC += instruction.condaddr + 1
+        return True
 
 
 def ex_dump(machine_state, start=0):
@@ -117,7 +139,10 @@ def ex_halt(machine_state):
 def ex_ldur(instruction, machine_state):
     print("LDUR")
     machine_state.loads_issued += 1
-    # TODO
+    rn_data = machine_state.registers[instruction.Rn].data
+    address = rn_data + instruction.dtaddr
+    new_value = machine_state.get_value_at_address(address)
+    machine_state.registers[instruction.Rt].data = new_value
 
 
 def ex_ldurb(instruction, machine_state):
@@ -215,6 +240,11 @@ def ex_smulh(instruction, machine_state):
 def ex_stur(instruction, machine_state):
     print("STUR")
     machine_state.stores_issued += 1
+    rt_data = machine_state.registers[instruction.Rt].data
+    rn_data = machine_state.registers[instruction.Rn].data
+    address = instruction.dtaddr + rn_data
+
+    machine_state.set_value_at_address(address, rt_data)
 
 
 def ex_sturb(instruction, machine_state):
@@ -291,93 +321,101 @@ def execute_assembly(binary_instructions, filename, machine_state):
     # machine_state.print_program()
     # exit(1)
 
-    for instruction in binary_instructions:
-        machine_state.check_out_of_bounds()
-        name = instruction.name
+    while True:
+        for instruction in binary_instructions[machine_state.PC:]:
+            machine_state.check_out_of_bounds()
+            name = instruction.name
 
-        # special instruction that don't require both instruction & machine state
-        if name in pseudo_instructions:
-            if name == "PRNL":
-                ex_prnl()
-            elif name == "PRNT":
-                ex_prnt(machine_state)
-            elif name == "HALT":
-                ex_halt(machine_state)
-            elif name == "DUMP":
-                ex_dump(machine_state)
-            continue
+            # special instruction that don't require both instruction & machine state
+            if name in pseudo_instructions:
+                if name == "PRNL":
+                    ex_prnl()
+                elif name == "PRNT":
+                    ex_prnt(machine_state)
+                elif name == "HALT":
+                    ex_halt(machine_state)
+                elif name == "DUMP":
+                    ex_dump(machine_state)
+                continue
 
-        # since all the functions require the instruction & machine state
-        # create a variable to hold what function to call and then make
-        # one call with necessary parameters
-        func = None
+            # since all the functions require the instruction & machine state
+            # create a variable to hold what function to call and then make
+            # one call with necessary parameters
+            func = None
 
-        if name == "ADD":
-            func = ex_add
-        elif name == "ADDI":
-            func = ex_addi
-        elif name == "AND":
-            func = ex_and
-        elif name == "ANDI":
-            func = ex_addi
-        elif name == "B":
-            func = ex_b
-        elif name == "B.cond":
-            func = ex_b_cond
-        elif name == "BL":
-            func = ex_bl
-        elif name == "BR":
-            func = ex_br
-        elif name == "CBNZ":
-            func = ex_cbnz
-        elif name == "CBZ":
-            func = ex_cbz
-        elif name == "EOR":
-            func = ex_eor
-        elif name == "EORI":
-            func = ex_eori
-        elif name == "LDUR":
-            func = ex_ldur
-        elif name == "LDURB":
-            func = ex_ldurb
-        elif name == "LDURH":
-            func = ex_ldurh
-        elif name == "LDURW":
-            func = ex_ldurw
-        elif name == "LSL":
-            func = ex_lsl
-        elif name == "LSR":
-            func = ex_lsr
-        elif name == "MUL":
-            func = ex_mul
-        elif name == "ORR":
-            func = ex_orr
-        elif name == "ORRI":
-            func = ex_orri
-        elif name == "SDIV":
-            func = ex_sdiv
-        elif name == "SMULH":
-            func = ex_smulh
-        elif name == "STUR":
-            func = ex_stur
-        elif name == "STURW":
-            func = ex_sturw
-        elif name == "SUB":
-            func = ex_sub
-        elif name == "SUBI":
-            func = ex_subi
-        elif name == "SUBIS":
-            func = ex_subis
-        elif name == "SUBS":
-            func = ex_subs
-        elif name == "UDIV":
-            func = ex_udiv
-        elif name == "UMULH":
-            func = ex_umulh
-        else:
-            print("Error: '{}' not found".format(name))
-            exit(1)
-        func(instruction, machine_state)
-        machine_state.instructions_executed += 1
-        machine_state.PC += 1
+            if name == "ADD":
+                func = ex_add
+            elif name == "ADDI":
+                func = ex_addi
+            elif name == "AND":
+                func = ex_and
+            elif name == "ANDI":
+                func = ex_addi
+            elif name == "B":
+                func = ex_b
+            elif name == "B.cond":
+                func = ex_b_cond
+            elif name == "BL":
+                func = ex_bl
+            elif name == "BR":
+                func = ex_br
+            elif name == "CBNZ":
+                func = ex_cbnz
+            elif name == "CBZ":
+                func = ex_cbz
+            elif name == "EOR":
+                func = ex_eor
+            elif name == "EORI":
+                func = ex_eori
+            elif name == "LDUR":
+                func = ex_ldur
+            elif name == "LDURB":
+                func = ex_ldurb
+            elif name == "LDURH":
+                func = ex_ldurh
+            elif name == "LDURW":
+                func = ex_ldurw
+            elif name == "LSL":
+                func = ex_lsl
+            elif name == "LSR":
+                func = ex_lsr
+            elif name == "MUL":
+                func = ex_mul
+            elif name == "ORR":
+                func = ex_orr
+            elif name == "ORRI":
+                func = ex_orri
+            elif name == "SDIV":
+                func = ex_sdiv
+            elif name == "SMULH":
+                func = ex_smulh
+            elif name == "STUR":
+                func = ex_stur
+            elif name == "STURW":
+                func = ex_sturw
+            elif name == "SUB":
+                func = ex_sub
+            elif name == "SUBI":
+                func = ex_subi
+            elif name == "SUBIS":
+                func = ex_subis
+            elif name == "SUBS":
+                func = ex_subs
+            elif name == "UDIV":
+                func = ex_udiv
+            elif name == "UMULH":
+                func = ex_umulh
+            else:
+                print("Error: '{}' not found".format(name))
+                exit(1)
+            set_new_index = func(instruction, machine_state) or False
+
+            if set_new_index:
+                break
+            machine_state.instructions_executed += 1
+            machine_state.PC += 1
+
+        if machine_state.instructions_executed == len(binary_instructions):
+            break
+
     return machine_state

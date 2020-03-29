@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conditionals.py" beforeDir="false" afterPath="$PROJECT_DIR$/conditionals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/directory.py" beforeDir="false" afterPath="$PROJECT_DIR$/directory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/machine.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/register.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,10 +179,10 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="468" y="198" key="RollbackChangesDialog/0.0.1536.960@0.0.1536.960" timestamp="1585252492908" />
-    <state x="269" y="119" key="SettingsEditor" timestamp="1585510378366">
+    <state x="269" y="119" key="SettingsEditor" timestamp="1585515801688">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="269" y="119" key="SettingsEditor/0.0.1536.960@0.0.1536.960" timestamp="1585510378366" />
+    <state x="269" y="119" key="SettingsEditor/0.0.1536.960@0.0.1536.960" timestamp="1585515801688" />
     <state x="100" y="100" width="1336" height="760" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584432093206">
       <screen x="0" y="0" width="1536" height="960" />
     </state>

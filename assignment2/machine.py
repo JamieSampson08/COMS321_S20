@@ -61,9 +61,8 @@ class Machine:
 
     def convert_and_store_binary_string(self, decimal_value, address):
         binary_rep = "{:08b}".format(decimal_value)
-        memory = self.memory
-        before = memory[:address]
-        after = memory[address + 8:]
+        before = self.memory[:address]
+        after = self.memory[address + 8:]
         self.memory = before + binary_rep + after
 
     def check_out_of_bounds(self):
@@ -90,3 +89,11 @@ class Machine:
             conditional = reg.data
             if conditional.name in TYPES[type_list]:
                 conditional.set_flag()
+
+    def get_value_at_address(self, address):
+        binary_string = self.memory[address:address+8]
+        value = int(binary_string, 2)
+        return value
+
+    def set_value_at_address(self, address, new_value):
+        self.convert_and_store_binary_string(new_value, address)
