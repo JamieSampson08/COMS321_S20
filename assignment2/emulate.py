@@ -107,6 +107,7 @@ def ex_dump(machine_state, start=0):
     # hexdump(sys.stdout, start, machine_state.stack_size)
 
     machine_state.print_program()
+    machine_state.print_stats()
     exit(1)
 
 
@@ -318,13 +319,15 @@ def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
-    # machine_state.print_program()
-    # exit(1)
+    start_index = machine_state.PC
+    prev_instruction = None
 
     while True:
-        for instruction in binary_instructions[machine_state.PC:]:
+        # [start index (inclusive) : end index (not inclusive)
+        for instruction in binary_instructions[start_index:]:
             machine_state.check_out_of_bounds()
             name = instruction.name
+            prev_instruction = instruction
 
             # special instruction that don't require both instruction & machine state
             if name in pseudo_instructions:
@@ -409,13 +412,15 @@ def execute_assembly(binary_instructions, filename, machine_state):
                 print("Error: '{}' not found".format(name))
                 exit(1)
             set_new_index = func(instruction, machine_state) or False
+            machine_state.instructions_executed += 1
 
             if set_new_index:
+                start_index = machine_state.PC
                 break
-            machine_state.instructions_executed += 1
+
             machine_state.PC += 1
 
-        if machine_state.instructions_executed == len(binary_instructions):
+        if prev_instruction == binary_instructions[-1]:
             break
 
     return machine_state

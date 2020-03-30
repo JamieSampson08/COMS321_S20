@@ -2,7 +2,7 @@ main:
 ADDI X1, XZR, #4
 ADDI X2, XZR, #24
 B end
-ADDI X5, XZR, #12
+ADDI X7, XZR, #12
 
 
 end: 

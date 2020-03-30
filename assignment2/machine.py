@@ -75,7 +75,7 @@ class Machine:
         self.convert_and_store_binary_string(value, self.memory_location)
 
         self.memory_location += 8
-        self.print_memory(start_address, self.memory_location) # DEBUGGING
+        # self.print_memory(start_address, self.memory_location) # DEBUGGING
 
     def set_conditional_flags(self, result):
         if result == 0:
@@ -97,3 +97,7 @@ class Machine:
 
     def set_value_at_address(self, address, new_value):
         self.convert_and_store_binary_string(new_value, address)
+
+    def print_stats(self):
+        print("\nInstructions Executed: {}\nLoads Executed: {}\nStores Executed: {}\n".format(
+            self.instructions_executed, self.loads_issued, self.stores_issued))
