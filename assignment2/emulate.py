@@ -36,7 +36,7 @@ def ex_and(instruction, machine_state):
     print("AND")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
-    new_value = rn_data & rm_data
+    new_value = rn_data and rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)
@@ -46,7 +46,7 @@ def ex_andi(instruction, machine_state):
     print("ANDI")
 
     rn_data = machine_state.registers[instruction.Rn].data
-    new_value = rn_data & instruction.aluimm
+    new_value = rn_data and instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)

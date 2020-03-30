@@ -1,0 +1,100 @@
+ADDI X5, XZR, #12
+PRNT X5 // = 12
+
+ADD X3, X5, X5
+PRNT X3 // = 24
+
+AND X8, X5, X3 // X8 = X5 & X3 -> 12 & 24
+PRNT X8 // = 8
+
+ANDI X9, X5, #12  // X9 = X5 & 5 -> 12 & 5
+PRNT X9 // = 4
+
+CBNZ X5, skip1
+ADDI X1, XZR, #1
+PRNT X1 // = 1
+
+skip1:
+ORR X10, X5, X3 // X10 = X5 | X3 -> 12 | 3 
+PRNT X10 // = 15
+
+ORRI X11, X5, #25 // X11 = X5 | 3 -> 12 | 25
+PRNT X11 // = 29
+
+CBZ XZR, skip2
+ADDI X2, XZR, #2 // X2 = XZR + 2 -> 0 + 2 = 2
+PRNT X2 // = 2
+
+skip2:
+LSL X12, X3, #3  // X12 = X3 << 3 (X3 * 8) -> 24 << 8
+PRNT X12 // = 192
+
+LSR X13, X5, #3 // X13 = X5 >> 3 (X5 * 8) -> 12 >> 3
+PRNT X13 // = 1
+
+B skip3
+ADDI X10, XZR, #99
+PRNT X10
+
+skip3:
+MUL X9, X3, X5 // X9 = X3 * X5 -> 12 * 24
+PRNT X9 // = 288
+
+EOR X10, X5, X3 // X10 = X5 ^ X3 -> 12 ^ 24
+PRNT X10 // = 20
+
+EORI X12, X5, #42 // X12 = X5 ^ 42 -> 12 ^ 42
+PRNT X12 // = 38
+
+SDIV X13, X3, X5 // X13 = X3 / X5 -> 24 / 12
+PRNT X13 // = 2
+
+BL skip4
+ADDI X7, XZR, #11
+PRNT X7
+B skip6
+
+skip4:
+STUR X5, [X15, #16] // X15 + 16 = X5 -> address  + 16 = 12
+
+ADDI X4, XZR, #54
+PRNT X4
+ADDI X6, XZR, #1
+PRNT X6
+BR LR
+
+skip6:
+ADD X5, X7, X6 // X5 = X7 + X6 -> 11 + 1
+PRNT X5
+
+LDUR X5, [X15, #16] // X5 = X15 + 16 -> adress + 16
+PRNT X5 // = 12
+
+SUB X14, X4, X3 // X14 = X4 - X3 -> 54 - 24
+PRNT X14 // = 30
+
+SUBI X9, X5, #40 // X9 = X5 - 40 -> 12 - 40
+PRNT X9 // = -28
+
+SUBIS X15, X3, #12 // X15 = X4 - 12 -> 12 - 12
+PRNT X15 // = 0, set all equals to 1
+
+B.GE skip7
+PRNT X5
+PRNT X6
+
+skip7:
+SUBIS X16, X3, #30 // X16 = X3 - 30 -> 24 - 30
+PRNT X16 // = -6, set all lesser to 1 
+
+SDIV X12, X3, X16 // X12 = X3 / X16 -> 24 / -6
+PRNT X12 // = 30
+
+PRNL
+
+SUBS X12, X4, X5 // X12 = X4 - X5 -> 54 - 12
+PRNT X12 // = 42, set all greater to 1
+
+HALT
+
+
