@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assembly_files/branch03.legv8asm" beforeDir="false" afterPath="$PROJECT_DIR$/assembly_files/branch03.legv8asm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,10 +121,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="267" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585533943351">
+    <state x="267" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585534130322">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="267" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1585533943351" />
+    <state x="267" y="96" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1585534130322" />
     <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585179788154">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -143,38 +141,38 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="882" y="188" width="523" height="568" key="#xdebugger.evaluate/0.0.1536.960@0.0.1536.960" timestamp="1585525321000" />
-    <state width="1494" height="408" key="GridCell.Tab.0.bottom" timestamp="1585533944916">
+    <state width="1494" height="408" key="GridCell.Tab.0.bottom" timestamp="1585578099824">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="408" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585533944916" />
-    <state width="1494" height="408" key="GridCell.Tab.0.center" timestamp="1585533944915">
+    <state width="1494" height="408" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585578099824" />
+    <state width="1494" height="408" key="GridCell.Tab.0.center" timestamp="1585578099822">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="408" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1585533944915" />
-    <state width="1494" height="408" key="GridCell.Tab.0.left" timestamp="1585533944914">
+    <state width="1494" height="408" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1585578099822" />
+    <state width="1494" height="408" key="GridCell.Tab.0.left" timestamp="1585578099822">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="408" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1585533944914" />
-    <state width="1494" height="408" key="GridCell.Tab.0.right" timestamp="1585533944915">
+    <state width="1494" height="408" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1585578099822" />
+    <state width="1494" height="408" key="GridCell.Tab.0.right" timestamp="1585578099823">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="408" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1585533944915" />
-    <state width="1494" height="295" key="GridCell.Tab.1.bottom" timestamp="1585533339678">
+    <state width="1494" height="408" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1585578099823" />
+    <state width="1494" height="310" key="GridCell.Tab.1.bottom" timestamp="1585536689619">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="295" key="GridCell.Tab.1.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585533339678" />
-    <state width="1494" height="295" key="GridCell.Tab.1.center" timestamp="1585533339678">
+    <state width="1494" height="310" key="GridCell.Tab.1.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585536689619" />
+    <state width="1494" height="310" key="GridCell.Tab.1.center" timestamp="1585536689619">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="295" key="GridCell.Tab.1.center/0.0.1536.960@0.0.1536.960" timestamp="1585533339678" />
-    <state width="1494" height="295" key="GridCell.Tab.1.left" timestamp="1585533339677">
+    <state width="1494" height="310" key="GridCell.Tab.1.center/0.0.1536.960@0.0.1536.960" timestamp="1585536689619" />
+    <state width="1494" height="310" key="GridCell.Tab.1.left" timestamp="1585536689618">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="295" key="GridCell.Tab.1.left/0.0.1536.960@0.0.1536.960" timestamp="1585533339677" />
-    <state width="1494" height="295" key="GridCell.Tab.1.right" timestamp="1585533339678">
+    <state width="1494" height="310" key="GridCell.Tab.1.left/0.0.1536.960@0.0.1536.960" timestamp="1585536689618" />
+    <state width="1494" height="310" key="GridCell.Tab.1.right" timestamp="1585536689619">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="295" key="GridCell.Tab.1.right/0.0.1536.960@0.0.1536.960" timestamp="1585533339678" />
+    <state width="1494" height="310" key="GridCell.Tab.1.right/0.0.1536.960@0.0.1536.960" timestamp="1585536689619" />
     <state x="468" y="198" key="RollbackChangesDialog" timestamp="1585252492908">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -183,6 +181,10 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="269" y="119" key="SettingsEditor/0.0.1536.960@0.0.1536.960" timestamp="1585515801688" />
+    <state width="768" height="480" key="XDebugger.FullValuePopup" timestamp="1585536663689">
+      <screen x="0" y="0" width="1536" height="960" />
+    </state>
+    <state width="768" height="480" key="XDebugger.FullValuePopup/0.0.1536.960@0.0.1536.960" timestamp="1585536663689" />
     <state x="100" y="100" width="1336" height="760" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584432093206">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -209,14 +211,14 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/emulate.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="11" />
+          <line>165</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/assignment2$driver.coverage" NAME="driver Coverage Results" MODIFIED="1585533944902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assignment2$driver.coverage" NAME="driver Coverage Results" MODIFIED="1585536742689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="driver Coverage Results" MODIFIED="1585024152763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assignment2$Unittests_for_tests_MyTestCase_test_bcond.coverage" NAME="Unittests for tests.MyTestCase.test_bcond Coverage Results" MODIFIED="1585197464165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

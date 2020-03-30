@@ -98,6 +98,7 @@ def ex_cbz(instruction, machine_state):
 
 
 def ex_dump(machine_state, start=0):
+    exit(1)
     machine_state.print_all_registers(include_conditional=True)
     how_to_read_mem_stack_table()
     print("Memory:\n")
@@ -216,9 +217,10 @@ def ex_prnl():
     print("\n")
 
 
-def ex_prnt(machine_state):
+def ex_prnt(instruction, machine_state):
     print("PRNT")
-    machine_state.print_all_registers(include_conditional=True)
+    reg = machine_state.registers[instruction.Rd]
+    reg.print_register()
 
 
 def ex_sdiv(instruction, machine_state):
@@ -334,7 +336,7 @@ def execute_assembly(binary_instructions, filename, machine_state):
                 if name == "PRNL":
                     ex_prnl()
                 elif name == "PRNT":
-                    ex_prnt(machine_state)
+                    ex_prnt(instruction, machine_state)
                 elif name == "HALT":
                     ex_halt(machine_state)
                 elif name == "DUMP":
@@ -411,13 +413,14 @@ def execute_assembly(binary_instructions, filename, machine_state):
             else:
                 print("Error: '{}' not found".format(name))
                 exit(1)
-            set_new_index = func(instruction, machine_state) or False
+
+            if instruction.name not in ["SUB", "SUBI"]:
+                set_new_index = func(instruction, machine_state) or False
+
+                if set_new_index:
+                    start_index = machine_state.PC
+                    break
             machine_state.instructions_executed += 1
-
-            if set_new_index:
-                start_index = machine_state.PC
-                break
-
             machine_state.PC += 1
 
         if prev_instruction == binary_instructions[-1]:

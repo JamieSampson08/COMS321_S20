@@ -13,8 +13,8 @@ def main(argv):
     binary_instructions = decode(filename)
     print("\nExecuting Instructions:")
     machine_state = execute_assembly(binary_instructions, filename, machine_state)
-    ex_dump(machine_state)  # DEBUGGING
+    # ex_dump(machine_state)  # DEBUGGING
 
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])
