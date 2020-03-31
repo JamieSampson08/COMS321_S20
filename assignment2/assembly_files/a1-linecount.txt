@@ -1,0 +1,69 @@
+ADDI X1, XZR, #8
+BL fill
+BL printArray
+PRNL
+BL bubblesort
+BL printArray
+B endProgram
+ADDI X9, XZR, #0
+SUB X10, X9, X1
+CBZ X10, return
+SUB X10, X1, X9
+LSL X11, X9, #3
+ADD X11, X11, X0
+STUR X10, [X11, #0]
+ADDI X9, X9, #1
+B fillLoop
+SUBI SP, SP, #8
+STUR LR, [SP, #0]
+ADDI X9, X1, #0
+SUBI X10, X9, #1
+CBZ X10, endBubble
+BL percolate
+SUBI X9, X9, #1
+B bubbleLoop
+LDUR LR, [SP, #0]
+ADDI SP, SP, #8
+B return
+SUBI SP, SP, #8
+STUR LR, [SP, #0]
+ADDI X12, XZR, #0
+SUBI X10, X1, #1
+SUB X10, X12, X10
+CBZ X10, endPercolate
+LSL Xl11, X12, #3
+ADD X22, X11, X0
+BL compare
+CBZ X7, nextPercolate
+ADDI X17, X12, #1
+LSL X11, X17, #3
+ADD X23, X11, X0
+BL swap
+ADDI X12, X12, #1
+B percolateLoop
+LDUR LR, [SP, #0]
+ADDI SP, SP, #8
+B return
+ADDI X5, XZR, #0
+SUB X10, X5, X1
+CBZ X10, return
+LSL X11, X5, #3
+ADD X11, X11, X0
+LDUR X12, [X11, #0]
+PRNT X12
+ADDI X5, X5, #1
+B printLoop
+LDUR X16, [X22, #0]
+LDUR X10, [X23, #0]
+STUR X16, [X23, #0]
+STUR X10, [X22, #0]
+B return
+ADDI X15, X22, #8
+LDUR X10, [X15, #0]
+LDUR X11, [X22, #0]
+ADDI X7, XZR, #1
+SUBS XZR, X11, X10
+B.GT endCompare
+ADDI X7, XZR, #0
+B return
+BR LR

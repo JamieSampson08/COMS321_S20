@@ -12,7 +12,7 @@ NOT_REQUIRED = [
 
 
 def ex_add(instruction, machine_state):
-    print("ADD")
+    # print("ADD")
 
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
@@ -23,7 +23,7 @@ def ex_add(instruction, machine_state):
 
 
 def ex_addi(instruction, machine_state):
-    print("ADDI")  # Rd = Rn + ALUImm
+    # print("ADDI")  # Rd = Rn + ALUImm
 
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data + instruction.aluimm
@@ -33,34 +33,34 @@ def ex_addi(instruction, machine_state):
 
 
 def ex_and(instruction, machine_state):
-    print("AND")
+    # print("AND")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
-    new_value = rn_data and rm_data
+    new_value = rn_data & rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)
 
 
 def ex_andi(instruction, machine_state):
-    print("ANDI")
+    # print("ANDI")
 
     rn_data = machine_state.registers[instruction.Rn].data
-    new_value = rn_data and instruction.aluimm
+    new_value = rn_data & instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)
 
 
 def ex_b(instruction, machine_state):
-    print("B")
+    # print("B")
     machine_state.PC += instruction.braddr
     return True
 
 
 def ex_b_cond(instruction, machine_state):
-    print("B.cond")
-    result = machine_state.conditional_registers[instruction.Rt].data
+    # print("B.cond")
+    result = machine_state.get_conditional_value(instruction.Rt)
 
     if result:
         machine_state.PC += instruction.condaddr
@@ -68,37 +68,36 @@ def ex_b_cond(instruction, machine_state):
 
 
 def ex_bl(instruction, machine_state):
-    print("BL")
-    machine_state.registers[30] = machine_state.PC + instruction.braddr
+    # print("BL")
+    machine_state.registers[30].data = machine_state.PC + 1
     ex_b(instruction, machine_state)
     return True
 
 
 def ex_br(instruction, machine_state):
-    print("BR")
+    # print("BR")
     rn_data = machine_state.registers[instruction.Rn].data
     machine_state.PC = rn_data
     return True
 
 
 def ex_cbnz(instruction, machine_state):
-    print("CBNZ")
+    # print("CBNZ")
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data != 0:
-        machine_state.PC += instruction.condaddr + 1
+        machine_state.PC += instruction.condaddr
         return True
 
 
 def ex_cbz(instruction, machine_state):
-    print("CBZ")
+    # print("CBZ")
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data == 0:
-        machine_state.PC += instruction.condaddr + 1
+        machine_state.PC += instruction.condaddr
         return True
 
 
 def ex_dump(machine_state, start=0):
-    exit(1)
     machine_state.print_all_registers(include_conditional=True)
     how_to_read_mem_stack_table()
     print("Memory:\n")
@@ -113,7 +112,7 @@ def ex_dump(machine_state, start=0):
 
 
 def ex_eor(instruction, machine_state):
-    print("EOR")
+    # print("EOR")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data ^ rm_data
@@ -123,7 +122,7 @@ def ex_eor(instruction, machine_state):
 
 
 def ex_eori(instruction, machine_state):
-    print("EORI")
+    # print("EORI")
 
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data ^ instruction.aluimm
@@ -133,13 +132,13 @@ def ex_eori(instruction, machine_state):
 
 
 def ex_halt(machine_state):
-    print("HALT")
+    # print("HALT")
     ex_dump(machine_state)
     exit()
 
 
 def ex_ldur(instruction, machine_state):
-    print("LDUR")
+    # print("LDUR")
     machine_state.loads_issued += 1
     rn_data = machine_state.registers[instruction.Rn].data
     address = rn_data + instruction.dtaddr
@@ -163,7 +162,7 @@ def ex_ldurw(instruction, machine_state):
 
 
 def ex_lsl(instruction, machine_state):
-    print("LSL")
+    # print("LSL")
 
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data << instruction.shamt
@@ -173,7 +172,7 @@ def ex_lsl(instruction, machine_state):
 
 
 def ex_lsr(instruction, machine_state):
-    print("LSR")
+    # print("LSR")
 
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data >> instruction.shamt
@@ -183,7 +182,7 @@ def ex_lsr(instruction, machine_state):
 
 
 def ex_mul(instruction, machine_state):
-    print("MUL")
+    # print("MUL")
 
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
@@ -194,7 +193,7 @@ def ex_mul(instruction, machine_state):
 
 
 def ex_orr(instruction, machine_state):
-    print("ORR")
+    # print("ORR")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data | rm_data
@@ -204,7 +203,7 @@ def ex_orr(instruction, machine_state):
 
 
 def ex_orri(instruction, machine_state):
-    print("ORRI")
+    # print("ORRI")
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data | instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
@@ -213,12 +212,12 @@ def ex_orri(instruction, machine_state):
 
 
 def ex_prnl():
-    print("PRNL")
+    # print("PRNL")
     print("\n")
 
 
 def ex_prnt(instruction, machine_state):
-    print("PRNT")
+    # print("PRNT")
     reg = machine_state.registers[instruction.Rd]
     reg.print_register()
 
@@ -230,7 +229,7 @@ def ex_sdiv(instruction, machine_state):
 
     # TODO - need to convert rn_data & rm_data to binary, take two's compliment and then divide
 
-    new_value = rn_data / rm_data
+    new_value = int(rn_data / rm_data)
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)
@@ -241,7 +240,7 @@ def ex_smulh(instruction, machine_state):
 
 
 def ex_stur(instruction, machine_state):
-    print("STUR")
+    # print("STUR")
     machine_state.stores_issued += 1
     rt_data = machine_state.registers[instruction.Rt].data
     rn_data = machine_state.registers[instruction.Rn].data
@@ -266,7 +265,7 @@ def ex_sturw(instruction, machine_state):
 
 
 def ex_sub(instruction, machine_state):
-    print("SUB")
+    # print("SUB")
 
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
@@ -278,7 +277,7 @@ def ex_sub(instruction, machine_state):
 
 
 def ex_subi(instruction, machine_state):
-    print("SUBI")
+    # print("SUBI")
 
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data - instruction.aluimm
@@ -289,13 +288,13 @@ def ex_subi(instruction, machine_state):
 
 
 def ex_subis(instruction, machine_state):
-    print("SUBIS")
+    # print("SUBIS")
     new_value = ex_subi(instruction, machine_state)
     machine_state.set_conditional_flags(new_value)
 
 
 def ex_subs(instruction, machine_state):
-    print("SUBS")
+    # print("SUBS")
     new_value = ex_sub(instruction, machine_state)
     machine_state.set_conditional_flags(new_value)
 
@@ -322,14 +321,13 @@ def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.binary_instructions = binary_instructions
 
     start_index = machine_state.PC
-    prev_instruction = None
+    continue_program = True
 
     while True:
         # [start index (inclusive) : end index (not inclusive)
         for instruction in binary_instructions[start_index:]:
             machine_state.check_out_of_bounds()
             name = instruction.name
-            prev_instruction = instruction
 
             # special instruction that don't require both instruction & machine state
             if name in pseudo_instructions:
@@ -341,6 +339,9 @@ def execute_assembly(binary_instructions, filename, machine_state):
                     ex_halt(machine_state)
                 elif name == "DUMP":
                     ex_dump(machine_state)
+                continue_program = progress_machine(machine_state)
+                if not continue_program:
+                    break
                 continue
 
             # since all the functions require the instruction & machine state
@@ -355,7 +356,7 @@ def execute_assembly(binary_instructions, filename, machine_state):
             elif name == "AND":
                 func = ex_and
             elif name == "ANDI":
-                func = ex_addi
+                func = ex_andi
             elif name == "B":
                 func = ex_b
             elif name == "B.cond":
@@ -420,10 +421,21 @@ def execute_assembly(binary_instructions, filename, machine_state):
                 if set_new_index:
                     start_index = machine_state.PC
                     break
-            machine_state.instructions_executed += 1
-            machine_state.PC += 1
-
-        if prev_instruction == binary_instructions[-1]:
+            else:
+                func(instruction, machine_state)
+            continue_program = progress_machine(machine_state)
+            if not continue_program:
+                break
+        if not continue_program:
             break
-
     return machine_state
+
+
+def progress_machine(machine_state):
+    machine_state.instructions_executed += 1
+    machine_state.PC += 1
+
+    # when the PC exceeds the address of the last instruction, end program
+    if machine_state.PC >= len(machine_state.binary_instructions):
+        return False
+    return True

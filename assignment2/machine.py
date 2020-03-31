@@ -85,7 +85,7 @@ class Machine:
         elif result < 0:
             type_list = "LESSER"
 
-        for reg in self.condition_registers:
+        for reg in self.condition_registers.values():
             conditional = reg.data
             if conditional.name in TYPES[type_list]:
                 conditional.set_flag()
@@ -101,3 +101,9 @@ class Machine:
     def print_stats(self):
         print("\nInstructions Executed: {}\nLoads Executed: {}\nStores Executed: {}\n".format(
             self.instructions_executed, self.loads_issued, self.stores_issued))
+
+    def get_conditional_value(self, reg_number):
+        for key, value in self.condition_registers.items():
+            if value.reg_number == reg_number:
+                return value.data.flag
+        print("Error: Conditional Register {} does not exist".format(reg_number))

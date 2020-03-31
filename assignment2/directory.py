@@ -106,18 +106,21 @@ instruct_dir = {
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"],  # Rt = [Rn + DTAddr]
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
     },
     "LDURH": {
         "opcode": b'01111000010',  # Load Half Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"],  # Rt = [Rn + DTAddr]
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
     },
     "LDURSW": {
         "opcode": b'10111000100',  # Load Signed Word Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "Rn", "dtaddr"], # Rt = [Rn + DTAddr]
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
     },
     "LSL": {
         "opcode": b"11010011011",  # Logical Shift Left
@@ -168,12 +171,14 @@ instruct_dir = {
         "shamt": b"000010",
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn / Rm
         "assembly": "Rd, Rn, Rm",
+        "required": False,
     },
     "SMULH": {
         "opcode": b"10011011010",  # Signed Multiply High
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)
         "assembly": "Rd, Rn, Rm",
+        "required": False,
     },
     "STUR": {
         "opcode": b"11111000000",  # Store Register Unscaled Offset
@@ -186,18 +191,21 @@ instruct_dir = {
         "format_type": FormatType.D,
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
     },
     "STURH": {
         "opcode": b'01111000000',  # Store Half Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rt", "dtaddr", "Rn"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
     },
     "STURW": {
         "opcode": b"10111000000",  # Store Word Unscaled Offset
         "format_type": FormatType.D,
         "operation": ["Rn", "dtaddr", "Rt"],  # [Rn + DTAddr] = Rt
         "assembly": "Rt, [Rn, dtaddr]",
+        "required": False,
 
     },
     "SUB": {
@@ -230,11 +238,13 @@ instruct_dir = {
         "shamt": b"000011",
         "operation": ["Rd", "Rn", "Rm"],  # Rd = Rn / Rm
         "assembly": "Rd, Rn, Rm",
+        "required": False,
     },
     "UMULH": {
         "opcode": b"10011011110",  # Unsigned Multiply High
         "format_type": FormatType.R,
         "operation": ["Rd", "Rn", "Rm"],  # Rd = (Rn * Rm)
         "assembly": "Rd, Rn, Rm",
+        "required": False,
     },
 }

@@ -151,6 +151,5 @@ def construct_assembly(instruction):
         # replace binary value of attribute with decimal value
         instruction.update_value(op, decimal_value)
     instruction.add_properties(assembly=assembly)
-    instruction.print_values()
-    # print(instruction.assembly)
+    # instruction.print_values()
 

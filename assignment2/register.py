@@ -43,6 +43,9 @@ class Register:
             data = self.data
             if self.use in ["XZR", "SP", "FP", "LR", "IP1", "IP0"]:
                 use_info = "({})".format(self.use)
-        information = "{:>5} X{:<3}: {:018x} ({:d})".format(use_info, self.reg_number, data, data)
+        if data < 0:
+            data = "{:X}".format(data & (2 ** 64 - 1))
+            data = int(data, 16)
+        information = "{:>5} X{:<3}: {:#018x} ({:d})".format(use_info, self.reg_number, data, data)
         print(information)
 
