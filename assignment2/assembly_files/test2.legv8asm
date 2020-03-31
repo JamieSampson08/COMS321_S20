@@ -1,0 +1,9 @@
+ADDI X3, XZR, #42
+PRNT X3
+SUBI X5, X3, #20
+PRNT X5
+B.GE end
+ADDI X7, XZR, #99
+PRNT X7
+
+end:
