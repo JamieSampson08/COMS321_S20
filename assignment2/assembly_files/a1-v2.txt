@@ -1,0 +1,80 @@
+ADDI X1, XZR, #8 // X1:size = 8
+BL fill
+BL printArray
+PRNL
+BL bubblesort
+BL printArray
+B endProgram
+ADDI X9, XZR, #0 // i = 0
+SUB X10, X9, X1 // X10 = i - size
+CBZ X10, return // i == size
+SUB X10, X1, X9 // X10 = size - i, X10 = value to store in array
+LSL X11, X9, #3 // X11 = i * 8, X11 = offset from base to a[i]
+ADD X11, X11, X0 // X11 = address of a[i]
+STUR X10, [X11, #0] // store X10 at X11
+ADDI X9, X9, #1 // i++
+B fillLoop
+SUBI SP, SP, #8 // make space in stack
+STUR LR, [SP, #0] // store LR
+ADDI X9, X1, #0 // i = size
+SUBI X10, X9, #1 // X10 = i - 1
+CBZ X10, endBubble // i == size
+BL percolate
+SUBI X9, X9, #1 // i--
+B bubbleLoop
+LDUR LR, [SP, #0] // load LR
+ADDI SP, SP, #8 // return stack
+B return
+SUBI SP, SP, #8 // make space in stack
+STUR LR, [SP, #0] // store LR
+ADDI X12, XZR, #0 // i = 0
+SUBI X10, X1, #1 // size - 1
+SUB X10, X12, X10 // i - size
+CBZ X10, endPercolate
+LSL X11, X12, #3 // X11 = i * 8
+ADD X22, X11, X0 // X0 = address of a[i]
+BL compare
+CBZ X7, nextPercolate
+ADDI X17, X12, #1 // i + 1
+LSL X11, X17, #3 // X1 = (i+1) * 8
+ADD X23, X11, X0 // X23 = address of a[i+1]
+PRNL
+BL swap
+ADDI X12, X12, #1 // i++
+B percolateLoop
+LDUR LR, [SP, #0] // load LR
+ADDI SP, SP, #8 // return stock
+B return
+ADDI X5, XZR, #0 // i = 0
+SUB X10, X5, X1 // X10 = i - size
+CBZ X10, return // i == size
+LSL X11, X5, #3 // X11 = i * 8, X11 = offset from base to a[i]
+ADD X11, X11, X0 // X11 = address of a[i]
+LDUR X12, [X11, #0] // load value of a[i] into X12
+PRNT X12
+ADDI X5, X5, #1 // i++
+B printLoop
+LDUR X16, [X22, #0] // X16 = value at address a
+PRNT X16
+LDUR X10, [X23, #0] // X10 = value at address b
+PRNT X10
+STUR X16, [X23, #0] // *b = *a
+STUR X10, [X22, #0] // *a = *b
+B ret
+ADDI X15, X22, #8 // X15 = address of a[i+1] = &a + 8
+PRNT X15
+LDUR X10, [X15, #0] // X10 = value at a[i+1]
+PRNT X10
+LDUR X11, [X22, #0] // X11 = value at a[i]
+PRNT X11
+ADDI X7, XZR, #1 // return = 1
+PRNT X7
+SUBS XZR, X11, X10 // compare X11 and X10
+PRNT XZR
+B.GT endCompare // if greater than, return
+ADDI X7, XZR, #0 // return = 0
+PRNT X7
+PRNL
+B return
+BR LR
+

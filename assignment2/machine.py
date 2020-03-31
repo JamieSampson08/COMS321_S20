@@ -78,6 +78,7 @@ class Machine:
         # self.print_memory(start_address, self.memory_location) # DEBUGGING
 
     def set_conditional_flags(self, result):
+        self.reset_conditional_registers()
         if result == 0:
             type_list = "EQUALS"
         elif result > 0:
@@ -107,3 +108,7 @@ class Machine:
             if value.reg_number == reg_number:
                 return value.data.flag
         print("Error: Conditional Register {} does not exist".format(reg_number))
+
+    def reset_conditional_registers(self):
+        for reg in self.condition_registers.values():
+            reg.data.reset_flag()
