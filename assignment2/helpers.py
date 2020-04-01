@@ -24,16 +24,11 @@ def how_to_read_mem_stack_table():
 
 def printable_char(c):
     """
-    TODO - doesn't work
     :param c:
     :return: c if printable, else "."
     """
-    hex_fenced_value = ".."
-    if c[0] != 0 and c[0].isprintable:
-        hex_fenced_value = hex_fenced_value.replace(".", c[0], 1)
-    if c[1] != 0 and c[1].isprintable:
-        hex_fenced_value = hex_fenced_value.replace(".", c[1], 2)
-    return hex_fenced_value if hex_fenced_value != "00" else '.'
+    val = chr(int(c, 16))
+    return val if val.isprintable() else '.'
 
 
 def format_storage_to_dump(storage):
@@ -70,7 +65,7 @@ def hexdump(file, size, machine_state):
     :return:
     """
     i = 0
-
+    print(printable_char('4D'))
     storage = format_storage_to_dump(machine_state.memory)
 
     if size == machine_state.stack_size:
