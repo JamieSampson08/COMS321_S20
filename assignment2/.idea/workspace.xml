@@ -3,13 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/driver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/emulate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/machine.py" beforeDir="false" afterPath="$PROJECT_DIR$/machine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -132,10 +146,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="280" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585700134205">
+    <state x="295" y="151" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585709857173">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="280" y="241" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1585700134205" />
+    <state x="295" y="151" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.960@0.0.1536.960" timestamp="1585709857173" />
     <state x="88" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585179788154">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -152,42 +166,42 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="884" y="188" width="523" height="568" key="#xdebugger.evaluate/0.0.1536.960@0.0.1536.960" timestamp="1585631027301" />
-    <state width="1494" height="428" key="GridCell.Tab.0.bottom" timestamp="1585700135128">
+    <state width="1098" height="445" key="GridCell.Tab.0.bottom" timestamp="1585709974862">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="428" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585700135128" />
-    <state width="1494" height="428" key="GridCell.Tab.0.center" timestamp="1585700135127">
+    <state width="1098" height="445" key="GridCell.Tab.0.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585709974862" />
+    <state width="1098" height="445" key="GridCell.Tab.0.center" timestamp="1585709974861">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="428" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1585700135127" />
-    <state width="1494" height="428" key="GridCell.Tab.0.left" timestamp="1585700135126">
+    <state width="1098" height="445" key="GridCell.Tab.0.center/0.0.1536.960@0.0.1536.960" timestamp="1585709974861" />
+    <state width="1098" height="445" key="GridCell.Tab.0.left" timestamp="1585709974860">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="428" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1585700135126" />
-    <state width="1494" height="428" key="GridCell.Tab.0.right" timestamp="1585700135127">
+    <state width="1098" height="445" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1585709974860" />
+    <state width="1098" height="445" key="GridCell.Tab.0.right" timestamp="1585709974861">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1494" height="428" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1585700135127" />
-    <state width="1037" height="423" key="GridCell.Tab.1.bottom" timestamp="1585683883468">
+    <state width="1098" height="445" key="GridCell.Tab.0.right/0.0.1536.960@0.0.1536.960" timestamp="1585709974861" />
+    <state width="889" height="383" key="GridCell.Tab.1.bottom" timestamp="1585709025559">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1037" height="423" key="GridCell.Tab.1.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585683883468" />
-    <state width="1037" height="423" key="GridCell.Tab.1.center" timestamp="1585683883467">
+    <state width="889" height="383" key="GridCell.Tab.1.bottom/0.0.1536.960@0.0.1536.960" timestamp="1585709025559" />
+    <state width="889" height="383" key="GridCell.Tab.1.center" timestamp="1585709025558">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1037" height="423" key="GridCell.Tab.1.center/0.0.1536.960@0.0.1536.960" timestamp="1585683883467" />
-    <state width="1037" height="423" key="GridCell.Tab.1.left" timestamp="1585683883466">
+    <state width="889" height="383" key="GridCell.Tab.1.center/0.0.1536.960@0.0.1536.960" timestamp="1585709025558" />
+    <state width="889" height="383" key="GridCell.Tab.1.left" timestamp="1585709025557">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1037" height="423" key="GridCell.Tab.1.left/0.0.1536.960@0.0.1536.960" timestamp="1585683883466" />
-    <state width="1037" height="423" key="GridCell.Tab.1.right" timestamp="1585683883467">
+    <state width="889" height="383" key="GridCell.Tab.1.left/0.0.1536.960@0.0.1536.960" timestamp="1585709025557" />
+    <state width="889" height="383" key="GridCell.Tab.1.right" timestamp="1585709025558">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state width="1037" height="423" key="GridCell.Tab.1.right/0.0.1536.960@0.0.1536.960" timestamp="1585683883467" />
-    <state x="468" y="198" key="RollbackChangesDialog" timestamp="1585683888316">
+    <state width="889" height="383" key="GridCell.Tab.1.right/0.0.1536.960@0.0.1536.960" timestamp="1585709025558" />
+    <state x="468" y="198" key="RollbackChangesDialog" timestamp="1585704224136">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="468" y="198" key="RollbackChangesDialog/0.0.1536.960@0.0.1536.960" timestamp="1585683888316" />
+    <state x="468" y="198" key="RollbackChangesDialog/0.0.1536.960@0.0.1536.960" timestamp="1585704224136" />
     <state x="269" y="119" key="SettingsEditor" timestamp="1585515801688">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -204,10 +218,10 @@
       <screen x="0" y="0" width="1536" height="960" />
     </state>
     <state x="164" y="404" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.960@0.0.1536.960" timestamp="1585362172224" />
-    <state x="426" y="115" width="837" height="729" key="find.popup" timestamp="1585627171486">
+    <state x="426" y="115" width="837" height="729" key="find.popup" timestamp="1585709712362">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
-    <state x="426" y="115" width="837" height="729" key="find.popup/0.0.1536.960@0.0.1536.960" timestamp="1585627171486" />
+    <state x="426" y="115" width="837" height="729" key="find.popup/0.0.1536.960@0.0.1536.960" timestamp="1585709712362" />
     <state x="530" y="118" key="refactoring.ChangeSignatureDialog" timestamp="1585370784858">
       <screen x="0" y="0" width="1536" height="960" />
     </state>
@@ -227,7 +241,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/assignment2$driver.coverage" NAME="driver Coverage Results" MODIFIED="1585700135121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assignment2$driver.coverage" NAME="driver Coverage Results" MODIFIED="1585709858574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assignment2$emulator_legv8.coverage" NAME="driver Coverage Results" MODIFIED="1585024152763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assignment2$Unittests_for_tests_MyTestCase_test_bcond.coverage" NAME="Unittests for tests.MyTestCase.test_bcond Coverage Results" MODIFIED="1585197464165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

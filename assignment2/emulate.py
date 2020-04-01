@@ -378,6 +378,10 @@ def call_instructions(machine_state):
             func = ex_smulh
         elif name == "STUR":
             func = ex_stur
+        elif name == "STURB":
+            func = ex_sturb
+        elif name == "STURH":
+            func = ex_sturh
         elif name == "STURW":
             func = ex_sturw
         elif name == "SUB":

@@ -54,10 +54,23 @@ class Machine:
     def print_program(self):
         print("Program")
         for instruct in self.binary_instructions:
-            print(" ", instruct.assembly)
+            to_print = instruct.assembly
+            to_print = to_print.replace("X28", "SP")
+            to_print = to_print.replace("X29", "FP")
+            to_print = to_print.replace("X30", "LR")
+            to_print = to_print.replace("X31", "XZR")
+            print(" ", to_print)
 
-    def print_memory(self, start, end):
-        print(self.memory[start:end])
+    def print_memory(self):
+        start = 0
+        end = 8
+        counter = 0
+        while start != (self.memory_size - 8):
+            section = self.memory[start:end]
+            print("Location {}: {}".format(counter, int(section, 2)))
+            start = end
+            end += 8
+            counter += 1
 
     def convert_and_store_binary_string(self, decimal_value, address):
         binary_rep = "{:08b}".format(decimal_value)
@@ -75,7 +88,6 @@ class Machine:
         self.convert_and_store_binary_string(value, self.memory_location)
 
         self.memory_location += 8
-        # self.print_memory(start_address, self.memory_location) # DEBUGGING
 
     def set_conditional_flags(self, result):
         self.reset_conditional_registers()
