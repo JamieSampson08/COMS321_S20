@@ -11,23 +11,29 @@ ADDI X3, XZR, #7    // number to look for
 BL ITER_BINARY
 PRNT X0             // print index of number
 ADD X19, X0, XZR // Result of Iter_Binary
+PRNT X19
 ADDI X0, XZR, #0
 ADDI X1, XZR, #0
 ADDI X2, XZR, #8
 ADDI X3, XZR, #7
 BL RECUR_SEARCH
-PRNT X4
 ADD X20, X4, XZR // Result of recur_search
+PRNT X20
 SUB X9, X19, X20
 ADDI X10, XZR, #0
 STUR X9, [X10, #0] // STORE DIFFERENCE IN 0 OF MAIN MEMORY
+PRNT X9
 BL EXIT_ALL
 ARRAY_BUILD: SUBS X10, X9, X1   // X20 = (i - size) and set flags ////////////// ARRAY BUILD ///////////////////////
 B.GE EXIT_AB           // if i >= size, then exit
 SUB X11, X1, X9        // X11(off) = Size(X1) - i(X9)
+PRNT X11
 LSL X12, X9, #3        // X12 = i*8
+PRNT X12
 ADD X12, X12, X0       // X12 = (i*8) + (memory address)(X0)
+PRNT X12
 STUR X11, [X12, #0]
+PRNT X11
 ADDI X9, X9, #1
 B ARRAY_BUILD
 EXIT_AB: BR LR
@@ -44,38 +50,60 @@ ADDI X20, XZR, #0      // smallest = 0
 SS_LOOP: SUBS X9, X19, X22      //i < size?
 B.GE EXIT_SS
 LSL X9, X19, #3        // X9 = i*8
+PRNT X9
 ADD X0, X21, X9        // X0 = *arr + (i*8)
+PRNT X0
 SUB X1, X22, X19       // X1 = size - i
+PRNT X1
 BL FIND_SMALLEST
 ADD X20, XZR, X0       // smallest = find_smallest(...)
+PRNT X20
 LSL X9, X20, #3        // X9 = smallest*8
+PRNT X9
 ADD X9, X9, X21        // X9 = (smallest*8)+(*arr)
+PRNT X9
 LSL X10, X19, #3       // 10 = i*8
+PRNT X10
 ADD X0, X10, X21      // X11 = i*8 + *arr
+PRNT X0
 ADD X1, X10, X9       // X1 = arr + smallest + i
+PRNT X1
 BL SWAP
 ADDI X19, X19, #1
 B SS_LOOP
 EXIT_SS: LDUR LR, [SP, #32]
 LDUR X20, [SP, #24]
+PRNT X20
 LDUR X19, [SP, #16]
+PRNT X19
 LDUR X21, [SP, #8]
+PRNT X21
 LDUR X22, [SP, #0]
+PRNT X21
 ADDI SP, SP, #40
 BR LR
 FIND_SMALLEST: ADDI X9, XZR, #0       // set X9 = 0 ////////////////// FIND SMALLEST /////////////////////////////
 ADDI X10, XZR, #0      // set X10 = 0
 FS_LOOP: SUBS X11, X9, X1
+PRNT X11
 B.GE EXIT_FS
 LSL X11, X9, #3        // X11 = (i*8)
+PRNT X11
 ADD X11, X11, X0       // X11 = (*arr + (i*8))
+PRNT X11
 LDUR X12, [X11, #0]    // X12 = arr[i]
+PRNT X12
 LSL X11, X10, #3
+PRNT X11
 ADD X11, X11, X0
+PRNT X11
 LDUR X13, [X11, #0]    // X13 = arr[current]
+PRNT X13
 SUBS X11, X12, X13
+PRNT X11
 B.GE NOT_SMALLER
 ADD X10, XZR, X9       // X10(current) = X9(i)
+PRNT X10
 NOT_SMALLER: ADDI X9, X9, #1
 B FS_LOOP
 EXIT_FS: ADD X0, XZR, X10       // set X0 as min_index
@@ -83,36 +111,53 @@ BR LR
 SWAP: LDUR X9, [X0, #0]      // Temp(X9) = *a(X0) //////////////////// SWAP ////////////////////////////////////////
 LDUR X10,[X1, #0]      // X10 = *b(X1)
 STUR X9, [X1, #0]      // b = temp(X9)
+PRNT X9
 STUR X10,[X0, #0]      // a = *b(X10)
+PRNT X10
 BR LR
 ITER_BINARY: SUBI SP, SP, #24 ///////////////////////////////// BINARY SEARCH ITERATIOIN //////////////////////////
 STUR LR, [SP, #0]
 STUR X19, [SP, #8]
 STUR X20, [SP, #16]
 ADD X19, XZR, X1
+PRNT X19
 ADD X20, XZR, X2
+PRNT X20
 IB_LOOP: SUBS X9, X20, X19
 B.LT NOT_PRESENT_IB
 SUBI X9, X20, #1      // X9 = (r-1)
+PRNT X9
 ADD X9, X9, X19       // X9 = l + (r-1)
+PRNT X9
 LSR X9, X9, #1        // X9 = (l + (r-1))/2
+PRNT X9
 LSL X10, X9, #3       // X10 = (X9 * 8)
+PRNT X10
 ADD X10, X10, X0      // X10 = arr + mid
+PRNT X10
 LDUR X12, [X10, #0]   // X12 = arr[mid]
+PRNT X12
 SUB X11, X12, X3      // X11 = arr[mid] - target
+PRNT X11
 CBNZ X11, NOT_MID_IB
 ADD X0, XZR, X9
+PRNT X0
 B EXIT_IB
 NOT_MID_IB: SUBS X11, X3, X12
 B.GE NOT_LESS_IB
 SUBI X20, X9, #1
+PRNT X20
 NOT_LESS_IB: ADDI X19, X9, #1
 B IB_LOOP             // restart loop
 NOT_PRESENT_IB: ADDI X0, XZR, #1
 EXIT_IB: LDUR LR, [SP, #0]
+PRNT LR
 LDUR X19, [SP, #8]
+PRNT X19
 LDUR X20, [SP, #16]
+PRNT X20
 ADDI SP, SP, #24
+PRNT SP
 BR LR
 RECUR_SEARCH: SUBI SP, SP, #24 ////////////////////////////////////////// BINARY SEARCH RECURSIVE ////////////////////
 STUR LR, [SP, #0]
@@ -139,4 +184,4 @@ LDUR X1, [SP, #8]
 LDUR X2, [SP, #16]
 ADDI SP, SP, #24
 BR LR
-EXIT_ALL: DUMP //////////////////////////////////////////////////////// EXIT ///////////////////////////////////////
+EXIT_ALL: //////////////////////////////////////////////////////// EXIT ///////////////////////////////////////
