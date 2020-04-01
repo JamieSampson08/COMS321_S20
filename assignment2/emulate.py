@@ -434,6 +434,7 @@ def execute_assembly(binary_instructions, filename, machine_state):
 def progress_machine(machine_state):
     machine_state.instructions_executed += 1
     machine_state.PC += 1
+    machine_state.registers[31].data = 0
 
     # when the PC exceeds the address of the last instruction, end program
     if machine_state.PC >= len(machine_state.binary_instructions):
