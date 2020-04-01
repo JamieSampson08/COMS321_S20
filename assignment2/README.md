@@ -5,6 +5,10 @@ Spring 2019 : COM S 321 - Computer Architecture
 ## How to Use:
 ./run.sh <.machine file>
 
+## Exporting:
+Create Tar File: tar -czvf binary_emulator.tar.gz  submission
+Unpack Tar File: tar -xzvf binary_emulator.tar.gz 
+
 ##Python Files
 - conditionals.py : class for B.cond usage
 - constants.py : currently, just static sizes of mem and stack
