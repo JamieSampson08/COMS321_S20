@@ -1,5 +1,8 @@
 Jamie Sampson (sampson1)
 No build script needed
 
+Unpack Tar File:
+tar -xzvf binary_emulator.tar.gz
+
 Usage:
 ./run.sh <machine file>
