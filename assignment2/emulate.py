@@ -223,11 +223,9 @@ def ex_prnt(instruction, machine_state):
 
 
 def ex_sdiv(instruction, machine_state):
-    print("SDIV NOT REQUIRED")
+    # print("SDIV NOT REQUIRED")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
-
-    # TODO - need to convert rn_data & rm_data to binary, take two's compliment and then divide
 
     new_value = int(rn_data / rm_data)
     machine_state.registers[instruction.Rd].data = new_value
@@ -300,11 +298,17 @@ def ex_subs(instruction, machine_state):
 
 
 def ex_udiv(instruction, machine_state):
-    print("UDIV NOT REQUIRED")
+    sys.stderr.write("UDIV NOT TESTED")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
 
-    new_value = rn_data / rm_data
+    # if negative numbers, make positive
+    if rn_data < 0:
+        rn_data *= -1
+    if rm_data < 0:
+        rm_data *= -1
+
+    new_value = int(rn_data / rm_data)
     machine_state.registers[instruction.Rd].data = new_value
 
     machine_state.shift_memory(new_value)
@@ -314,119 +318,116 @@ def ex_umulh(instruction, machine_state):
     print("UMULH NOT IMPLEMENTED")
 
 
-def execute_assembly(binary_instructions, filename, machine_state):
+def call_instructions(machine_state):
     pseudo_instructions = ["PRNL", "PRNT", "HALT", "DUMP"]
 
+    for instruction in machine_state.binary_instructions[machine_state.PC:]:
+        machine_state.check_out_of_bounds()
+        name = instruction.name
+
+        # since all the functions require the instruction & machine state
+        # create a variable to hold what function to call and then make
+        # one call with necessary parameters
+        func = None
+
+        if name == "ADD":
+            func = ex_add
+        elif name == "ADDI":
+            func = ex_addi
+        elif name == "AND":
+            func = ex_and
+        elif name == "ANDI":
+            func = ex_andi
+        elif name == "B":
+            func = ex_b
+        elif name == "B.cond":
+            func = ex_b_cond
+        elif name == "BL":
+            func = ex_bl
+        elif name == "BR":
+            func = ex_br
+        elif name == "CBNZ":
+            func = ex_cbnz
+        elif name == "CBZ":
+            func = ex_cbz
+        elif name == "EOR":
+            func = ex_eor
+        elif name == "EORI":
+            func = ex_eori
+        elif name == "LDUR":
+            func = ex_ldur
+        elif name == "LDURB":
+            func = ex_ldurb
+        elif name == "LDURH":
+            func = ex_ldurh
+        elif name == "LDURW":
+            func = ex_ldurw
+        elif name == "LSL":
+            func = ex_lsl
+        elif name == "LSR":
+            func = ex_lsr
+        elif name == "MUL":
+            func = ex_mul
+        elif name == "ORR":
+            func = ex_orr
+        elif name == "ORRI":
+            func = ex_orri
+        elif name == "SDIV":
+            func = ex_sdiv
+        elif name == "SMULH":
+            func = ex_smulh
+        elif name == "STUR":
+            func = ex_stur
+        elif name == "STURW":
+            func = ex_sturw
+        elif name == "SUB":
+            func = ex_sub
+        elif name == "SUBI":
+            func = ex_subi
+        elif name == "SUBIS":
+            func = ex_subis
+        elif name == "SUBS":
+            func = ex_subs
+        elif name == "UDIV":
+            func = ex_udiv
+        elif name == "UMULH":
+            func = ex_umulh
+
+        # special instruction that don't require both instruction & machine state
+        if name in pseudo_instructions:
+            if name == "PRNL":
+                ex_prnl()
+            elif name == "PRNT":
+                ex_prnt(instruction, machine_state)
+            elif name == "HALT":
+                ex_halt(machine_state)
+            elif name == "DUMP":
+                ex_dump(machine_state)
+
+            if not progress_machine(machine_state):
+                return
+            continue
+
+        if instruction.name in ["SUB", "SUBI"]:
+            func(instruction, machine_state)
+        else:
+            set_new_index = func(instruction, machine_state) or False
+
+            if set_new_index:
+                break  # from for loop
+
+        if not progress_machine(machine_state):
+            return
+
+
+def execute_assembly(binary_instructions, filename, machine_state):
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
-    start_index = machine_state.PC
-    continue_program = True
-
     while True:
         # [start index (inclusive) : end index (not inclusive)
-        for instruction in binary_instructions[start_index:]:
-            machine_state.check_out_of_bounds()
-            name = instruction.name
-
-            # special instruction that don't require both instruction & machine state
-            if name in pseudo_instructions:
-                if name == "PRNL":
-                    ex_prnl()
-                elif name == "PRNT":
-                    ex_prnt(instruction, machine_state)
-                elif name == "HALT":
-                    ex_halt(machine_state)
-                elif name == "DUMP":
-                    ex_dump(machine_state)
-                continue_program = progress_machine(machine_state)
-                if not continue_program:
-                    break
-                continue
-
-            # since all the functions require the instruction & machine state
-            # create a variable to hold what function to call and then make
-            # one call with necessary parameters
-            func = None
-
-            if name == "ADD":
-                func = ex_add
-            elif name == "ADDI":
-                func = ex_addi
-            elif name == "AND":
-                func = ex_and
-            elif name == "ANDI":
-                func = ex_andi
-            elif name == "B":
-                func = ex_b
-            elif name == "B.cond":
-                func = ex_b_cond
-            elif name == "BL":
-                func = ex_bl
-            elif name == "BR":
-                func = ex_br
-            elif name == "CBNZ":
-                func = ex_cbnz
-            elif name == "CBZ":
-                func = ex_cbz
-            elif name == "EOR":
-                func = ex_eor
-            elif name == "EORI":
-                func = ex_eori
-            elif name == "LDUR":
-                func = ex_ldur
-            elif name == "LDURB":
-                func = ex_ldurb
-            elif name == "LDURH":
-                func = ex_ldurh
-            elif name == "LDURW":
-                func = ex_ldurw
-            elif name == "LSL":
-                func = ex_lsl
-            elif name == "LSR":
-                func = ex_lsr
-            elif name == "MUL":
-                func = ex_mul
-            elif name == "ORR":
-                func = ex_orr
-            elif name == "ORRI":
-                func = ex_orri
-            elif name == "SDIV":
-                func = ex_sdiv
-            elif name == "SMULH":
-                func = ex_smulh
-            elif name == "STUR":
-                func = ex_stur
-            elif name == "STURW":
-                func = ex_sturw
-            elif name == "SUB":
-                func = ex_sub
-            elif name == "SUBI":
-                func = ex_subi
-            elif name == "SUBIS":
-                func = ex_subis
-            elif name == "SUBS":
-                func = ex_subs
-            elif name == "UDIV":
-                func = ex_udiv
-            elif name == "UMULH":
-                func = ex_umulh
-            else:
-                print("Error: '{}' not found".format(name))
-                exit(1)
-
-            if instruction.name not in ["SUB", "SUBI"]:
-                set_new_index = func(instruction, machine_state) or False
-
-                if set_new_index:
-                    start_index = machine_state.PC
-                    break
-            else:
-                func(instruction, machine_state)
-            continue_program = progress_machine(machine_state)
-            if not continue_program:
-                break
-        if not continue_program:
+        call_instructions(machine_state)
+        if machine_state.PC >= len(machine_state.binary_instructions):
             break
     return machine_state
 
