@@ -30,15 +30,17 @@ def printable_char(c):
 
 
 # TODO - broken
-def hexdump(file, start, size):
+def hexdump(file, start, size, machine_state):
     """
-    Formats the contents of memory/stack
+    Formats the contents of storage/stack
     :param file: to write to
     :param start: address location
-    :param size: either size of memory or size of stack
+    :param size: either size of storage or size of stack
+    :param machine_state: need access to memory
     :return:
     """
     i = 0
+    storage = machine_state.storage
 
     while i < (size - size % 16):
         file.write("{:#010x} "
@@ -46,21 +48,21 @@ def hexdump(file, start, size):
                    " {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} "  # 02hhx
                    " |{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}|"  # char
                    "\n".format(i,
-                               start[i + 0], start[i + 1], start[i + 2], start[i + 3],
-                               start[i + 4], start[i + 5], start[i + 6], start[i + 7],
-                               start[i + 8], start[i + 9], start[i + 10], start[i + 11],
-                               start[i + 12], start[i + 13], start[i + 14], start[i + 15],
-                               printable_char(start[i + 0]), printable_char(start[i + 1]),
-                               printable_char(start[i + 2]), printable_char(start[i + 3]),
-                               printable_char(start[i + 4]), printable_char(start[i + 5]),
-                               printable_char(start[i + 6]), printable_char(start[i + 7]),
-                               printable_char(start[i + 8]), printable_char(start[i + 9]),
-                               printable_char(start[i + 10]),
-                               printable_char(start[i + 11]),
-                               printable_char(start[i + 12]),
-                               printable_char(start[i + 13]),
-                               printable_char(start[i + 14]),
-                               printable_char(start[i + 15])))
+                               storage[i + 0], storage[i + 1], storage[i + 2], storage[i + 3],
+                               storage[i + 4], storage[i + 5], storage[i + 6], storage[i + 7],
+                               storage[i + 8], storage[i + 9], storage[i + 10], storage[i + 11],
+                               storage[i + 12], storage[i + 13], storage[i + 14], storage[i + 15],
+                               printable_char(storage[i + 0]), printable_char(storage[i + 1]),
+                               printable_char(storage[i + 2]), printable_char(storage[i + 3]),
+                               printable_char(storage[i + 4]), printable_char(storage[i + 5]),
+                               printable_char(storage[i + 6]), printable_char(storage[i + 7]),
+                               printable_char(storage[i + 8]), printable_char(storage[i + 9]),
+                               printable_char(storage[i + 10]),
+                               printable_char(storage[i + 11]),
+                               printable_char(storage[i + 12]),
+                               printable_char(storage[i + 13]),
+                               printable_char(storage[i + 14]),
+                               printable_char(storage[i + 15])))
         i += 16
 
     file.write("{:#010x}\n".format(size))
