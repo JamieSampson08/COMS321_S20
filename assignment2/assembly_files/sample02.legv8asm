@@ -18,7 +18,7 @@ ADDI X2, XZR, #8
 ADDI X3, XZR, #7
 BL RECUR_SEARCH
 ADD X20, X4, XZR // Result of recur_search
-PRNT X20
+PRNT X20 // 					last X20
 SUB X9, X19, X20
 ADDI X10, XZR, #0
 STUR X9, [X10, #0] // STORE DIFFERENCE IN 0 OF MAIN MEMORY
@@ -48,6 +48,8 @@ ADD X22, XZR, X1
 ADDI X19, XZR, #0      // i = 0
 ADDI X20, XZR, #0      // smallest = 0
 SS_LOOP: SUBS X9, X19, X22      //i < size?
+PRNL
+PRNL
 B.GE EXIT_SS
 LSL X9, X19, #3        // X9 = i*8
 PRNT X9
@@ -56,8 +58,8 @@ PRNT X0
 SUB X1, X22, X19       // X1 = size - i
 PRNT X1
 BL FIND_SMALLEST
-ADD X20, XZR, X0       // smallest = find_smallest(...)
-PRNT X20
+ADD X20, XZR, X0       // smallest = find_smallest(...)L
+PRNT X20 //					prints after X11
 LSL X9, X20, #3        // X9 = smallest*8
 PRNT X9
 ADD X9, X9, X21        // X9 = (smallest*8)+(*arr)
@@ -71,9 +73,12 @@ PRNT X1
 BL SWAP
 ADDI X19, X19, #1
 B SS_LOOP
+PRNL  // NOT EXECUTED 
 EXIT_SS: LDUR LR, [SP, #32]
+PRNT LR
 LDUR X20, [SP, #24]
-PRNT X20
+PRNL
+PRNT X20 // 					THINK THIS IS THE ONE AFTER X10
 LDUR X19, [SP, #16]
 PRNT X19
 LDUR X21, [SP, #8]
@@ -122,7 +127,7 @@ STUR X20, [SP, #16]
 ADD X19, XZR, X1
 PRNT X19
 ADD X20, XZR, X2
-PRNT X20
+PRNT X20  // 				after X19
 IB_LOOP: SUBS X9, X20, X19
 B.LT NOT_PRESENT_IB
 SUBI X9, X20, #1      // X9 = (r-1)
@@ -146,7 +151,7 @@ B EXIT_IB
 NOT_MID_IB: SUBS X11, X3, X12
 B.GE NOT_LESS_IB
 SUBI X20, X9, #1
-PRNT X20
+PRNT X20 // NOT EXECUTED
 NOT_LESS_IB: ADDI X19, X9, #1
 B IB_LOOP             // restart loop
 NOT_PRESENT_IB: ADDI X0, XZR, #1
@@ -155,7 +160,7 @@ PRNT LR
 LDUR X19, [SP, #8]
 PRNT X19
 LDUR X20, [SP, #16]
-PRNT X20
+PRNT X20 // 			2nd to last X20
 ADDI SP, SP, #24
 PRNT SP
 BR LR
