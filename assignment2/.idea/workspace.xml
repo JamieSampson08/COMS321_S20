@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fa94b7f-f4b1-4fe7-9469-4af318271248" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/submission/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/conditionals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/constants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/decode.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/directory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/driver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/emulate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/formatting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/group.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/helpers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/instruction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/machine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/register.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/submission/run.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decode.py" beforeDir="false" afterPath="$PROJECT_DIR$/decode.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +151,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
