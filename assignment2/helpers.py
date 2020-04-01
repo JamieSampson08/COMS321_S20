@@ -1,5 +1,3 @@
-import binascii
-
 from directory import instruct_dir
 
 
@@ -24,6 +22,7 @@ def how_to_read_mem_stack_table():
 
 def printable_char(c):
     """
+    Convert hex to an int and then int to ascii character
     :param c:
     :return: c if printable, else "."
     """
@@ -32,6 +31,11 @@ def printable_char(c):
 
 
 def format_storage_to_dump(storage):
+    """
+    Takes contents of memory or stack and formats into hex pairs
+    :param storage: memory or stack list
+    :return: list of hex pairs
+    """
     storage_array = []
 
     for i in range(0, len(storage), 8):
@@ -58,14 +62,14 @@ def format_storage_to_dump(storage):
 
 def hexdump(file, size, machine_state):
     """
-    Formats the contents of storage/stack
+    Formats the contents of memory/stack
     :param file: to write to
     :param size: either size of storage or size of stack
     :param machine_state: need access to memory
     :return:
     """
     i = 0
-    print(printable_char('4D'))
+
     storage = format_storage_to_dump(machine_state.memory)
 
     if size == machine_state.stack_size:

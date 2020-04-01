@@ -25,12 +25,14 @@ def decode(filename):
                 zero_padding = "0" * len_diff
                 master_opcode = zero_padding + master_opcode
 
+            # creates all opcode versions with given 32 bit instruction
             opcode6 = master_opcode[:6].encode()
             opcode8 = master_opcode[:8].encode()
             opcode9 = master_opcode[:9].encode()
             opcode10 = master_opcode[:10].encode()
             opcode11 = master_opcode[:11].encode()
 
+            # create a new instruction and set the values of it's opcode attributes
             new_instruction = Instruction()
             new_instruction.add_properties(
                 opcode6=opcode6,

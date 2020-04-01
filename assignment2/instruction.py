@@ -107,6 +107,12 @@ class Instruction:
         return -1
 
     def update_value(self, attribute, value):
+        """
+        Updates one attribute of instruction
+        :param attribute: to update
+        :param value: to change to
+        :return:
+        """
         if attribute == "shamt":
             self.shamt = value
         if attribute == "Rn":

@@ -12,8 +12,6 @@ NOT_REQUIRED = [
 
 
 def ex_add(instruction, machine_state):
-    # print("ADD")
-
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data + rm_data
@@ -21,15 +19,12 @@ def ex_add(instruction, machine_state):
 
 
 def ex_addi(instruction, machine_state):
-    # print("ADDI")  # Rd = Rn + ALUImm
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data + instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_and(instruction, machine_state):
-    # print("AND")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data & rm_data
@@ -37,21 +32,17 @@ def ex_and(instruction, machine_state):
 
 
 def ex_andi(instruction, machine_state):
-    # print("ANDI")
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data & instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_b(instruction, machine_state):
-    # print("B")
     machine_state.PC += instruction.braddr
     return True
 
 
 def ex_b_cond(instruction, machine_state):
-    # print("B.cond")
     result = machine_state.get_conditional_value(instruction.Rt)
 
     if result:
@@ -60,21 +51,18 @@ def ex_b_cond(instruction, machine_state):
 
 
 def ex_bl(instruction, machine_state):
-    # print("BL")
     machine_state.registers[30].data = machine_state.PC + 1
     ex_b(instruction, machine_state)
     return True
 
 
 def ex_br(instruction, machine_state):
-    # print("BR")
     rn_data = machine_state.registers[instruction.Rn].data
     machine_state.PC = rn_data
     return True
 
 
 def ex_cbnz(instruction, machine_state):
-    # print("CBNZ")
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data != 0:
         machine_state.PC += instruction.condaddr
@@ -82,7 +70,6 @@ def ex_cbnz(instruction, machine_state):
 
 
 def ex_cbz(instruction, machine_state):
-    # print("CBZ")
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data == 0:
         machine_state.PC += instruction.condaddr
@@ -101,11 +88,9 @@ def ex_dump(machine_state):
 
     machine_state.print_program()
     machine_state.print_stats()
-    exit(1)
 
 
 def ex_eor(instruction, machine_state):
-    # print("EOR")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data ^ rm_data
@@ -113,21 +98,17 @@ def ex_eor(instruction, machine_state):
 
 
 def ex_eori(instruction, machine_state):
-    # print("EORI")
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data ^ instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_halt(machine_state):
-    # print("HALT")
     ex_dump(machine_state)
     exit()
 
 
 def ex_ldur(instruction, machine_state):
-    # print("LDUR")
     machine_state.loads_issued += 1
     rn_data = machine_state.registers[instruction.Rn].data
     address = rn_data + instruction.dtaddr
@@ -156,24 +137,18 @@ def ex_ldurw(instruction, machine_state):
 
 
 def ex_lsl(instruction, machine_state):
-    # print("LSL")
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data << instruction.shamt
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_lsr(instruction, machine_state):
-    # print("LSR")
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data >> instruction.shamt
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_mul(instruction, machine_state):
-    # print("MUL")
-
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data * rm_data
@@ -181,7 +156,6 @@ def ex_mul(instruction, machine_state):
 
 
 def ex_orr(instruction, machine_state):
-    # print("ORR")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data | rm_data
@@ -189,25 +163,21 @@ def ex_orr(instruction, machine_state):
 
 
 def ex_orri(instruction, machine_state):
-    # print("ORRI")
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data | instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
 
 def ex_prnl():
-    # print("PRNL")
     print("\n")
 
 
 def ex_prnt(instruction, machine_state):
-    # print("PRNT")
     reg = machine_state.registers[instruction.Rd]
     reg.print_register()
 
 
 def ex_sdiv(instruction, machine_state):
-    # print("SDIV NOT REQUIRED")
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
 
@@ -220,7 +190,6 @@ def ex_smulh(instruction, machine_state):
 
 
 def ex_stur(instruction, machine_state):
-    # print("STUR")
     machine_state.stores_issued += 1
     rt_data = machine_state.registers[instruction.Rt].data
     rn_data = machine_state.registers[instruction.Rn].data
@@ -249,8 +218,6 @@ def ex_sturw(instruction, machine_state):
 
 
 def ex_sub(instruction, machine_state):
-    # print("SUB")
-
     rn_data = machine_state.registers[instruction.Rn].data
     rm_data = machine_state.registers[instruction.Rm].data
     new_value = rn_data - rm_data
@@ -260,8 +227,6 @@ def ex_sub(instruction, machine_state):
 
 
 def ex_subi(instruction, machine_state):
-    # print("SUBI")
-
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data - instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
@@ -270,13 +235,11 @@ def ex_subi(instruction, machine_state):
 
 
 def ex_subis(instruction, machine_state):
-    # print("SUBIS")
     new_value = ex_subi(instruction, machine_state)
     machine_state.set_conditional_flags(new_value)
 
 
 def ex_subs(instruction, machine_state):
-    # print("SUBS")
     new_value = ex_sub(instruction, machine_state)
     machine_state.set_conditional_flags(new_value)
 
@@ -301,8 +264,15 @@ def ex_umulh(instruction, machine_state):
 
 
 def call_instructions(machine_state):
+    """
+    Determines what function to call based on the instruction name
+    :param machine_state:
+    :return:
+    """
     pseudo_instructions = ["PRNL", "PRNT", "HALT", "DUMP"]
 
+    # using the list of binary_instructions, handle branching by changing where the for loop
+    # starts reading from by using the PC
     for instruction in machine_state.binary_instructions[machine_state.PC:]:
         machine_state.check_out_of_bounds()
         name = instruction.name
@@ -394,19 +364,30 @@ def call_instructions(machine_state):
                 return
             continue
 
+        set_new_index = False
+
+        # return values of these two functions arn't needed
         if instruction.name in ["SUB", "SUBI"]:
             func(instruction, machine_state)
         else:
             set_new_index = func(instruction, machine_state) or False
 
-            if set_new_index:
-                break  # from for loop
-
         if not progress_machine(machine_state):
             return
 
+        if set_new_index:
+            break  # from for loop
+
 
 def execute_assembly(binary_instructions, filename, machine_state):
+    """
+    Handles calling all lines of assembly decoded and ends program
+    when appropriate
+    :param binary_instructions: to execute
+    :param filename: binary file name
+    :param machine_state: state of machine (is more or less empty)
+    :return:
+    """
     machine_state.filename = filename
     machine_state.binary_instructions = binary_instructions
 
@@ -419,6 +400,11 @@ def execute_assembly(binary_instructions, filename, machine_state):
 
 
 def progress_machine(machine_state):
+    """
+    Increases PC, instructions_executed, and resets XZR
+    :param machine_state: current state of machine
+    :return: bool, if reached end of program
+    """
     machine_state.instructions_executed += 1
     machine_state.PC += 1
     machine_state.registers[31].data = 0
