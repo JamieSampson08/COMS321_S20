@@ -1,1 +1,1 @@
-python driver.py $1
+python3 driver.py $1

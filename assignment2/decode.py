@@ -1,7 +1,7 @@
 from formatting import FormatType
 from instruction import Instruction
 from directory import instruct_dir
-from conditionals import CONDITIONS, Conditional
+from conditionals import CONDITIONS
 
 
 def decode(filename):
