@@ -39,6 +39,11 @@ B ARRAY_BUILD
 EXIT_AB: BR LR
 SELECTION_SORT: SUBI SP, SP, #40  ////////////////////////////////////// SELECTION SORT /////////////////////////////
 STUR LR, [SP, #32]
+PRNL
+PRNT LR
+PRNT SP
+PRNL 
+
 STUR X20, [SP, #24]
 STUR X19, [SP, #16]
 STUR X21, [SP, #8]     // X21 - placeholder for X0(*arr)
@@ -48,8 +53,6 @@ ADD X22, XZR, X1
 ADDI X19, XZR, #0      // i = 0
 ADDI X20, XZR, #0      // smallest = 0
 SS_LOOP: SUBS X9, X19, X22      //i < size?
-PRNL
-PRNL
 B.GE EXIT_SS
 LSL X9, X19, #3        // X9 = i*8
 PRNT X9
@@ -74,11 +77,14 @@ BL SWAP
 ADDI X19, X19, #1
 B SS_LOOP
 PRNL  // NOT EXECUTED 
-EXIT_SS: LDUR LR, [SP, #32]
+EXIT_SS: 
+PRNL
+LDUR LR, [SP, #32]
+PRNT SP
 PRNT LR
 LDUR X20, [SP, #24]
-PRNL
-PRNT X20 // 					THINK THIS IS THE ONE AFTER X10
+PRNT X20 //
+PRNL	//				THINK THIS IS THE ONE AFTER X10
 LDUR X19, [SP, #16]
 PRNT X19
 LDUR X21, [SP, #8]

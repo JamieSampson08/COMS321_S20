@@ -7,3 +7,4 @@ ADDI X7, XZR, #99
 PRNT X7
 
 end:
+DUMP
