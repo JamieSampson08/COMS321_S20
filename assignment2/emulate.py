@@ -19,8 +19,6 @@ def ex_add(instruction, machine_state):
     new_value = rn_data + rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_addi(instruction, machine_state):
     # print("ADDI")  # Rd = Rn + ALUImm
@@ -28,8 +26,6 @@ def ex_addi(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data + instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_and(instruction, machine_state):
@@ -39,8 +35,6 @@ def ex_and(instruction, machine_state):
     new_value = rn_data & rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_andi(instruction, machine_state):
     # print("ANDI")
@@ -48,8 +42,6 @@ def ex_andi(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data & instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_b(instruction, machine_state):
@@ -97,14 +89,15 @@ def ex_cbz(instruction, machine_state):
         return True
 
 
-def ex_dump(machine_state, start=0):
+def ex_dump(machine_state):
     machine_state.print_all_registers(include_conditional=True)
     how_to_read_mem_stack_table()
-    print("Memory:\n")
-    # hexdump(sys.stdout, start, machine_state.memory_size)
 
-    print("Stack:\n")
-    # hexdump(sys.stdout, start, machine_state.stack_size)
+    print("Stack:")
+    hexdump(sys.stdout, machine_state.stack_size, machine_state)
+
+    print("\nMain Memory:")
+    hexdump(sys.stdout, machine_state.memory_size, machine_state)
 
     machine_state.print_program()
     machine_state.print_stats()
@@ -118,8 +111,6 @@ def ex_eor(instruction, machine_state):
     new_value = rn_data ^ rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_eori(instruction, machine_state):
     # print("EORI")
@@ -127,8 +118,6 @@ def ex_eori(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data ^ instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_halt(machine_state):
@@ -142,7 +131,12 @@ def ex_ldur(instruction, machine_state):
     machine_state.loads_issued += 1
     rn_data = machine_state.registers[instruction.Rn].data
     address = rn_data + instruction.dtaddr
-    new_value = machine_state.get_value_at_address(address)
+
+    in_stack = False
+    if instruction.Rn == 28:
+        in_stack = True
+
+    new_value = machine_state.get_value_at_address(address, in_stack)
     machine_state.registers[instruction.Rt].data = new_value
 
 
@@ -168,8 +162,6 @@ def ex_lsl(instruction, machine_state):
     new_value = rn_data << instruction.shamt
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_lsr(instruction, machine_state):
     # print("LSR")
@@ -177,8 +169,6 @@ def ex_lsr(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data >> instruction.shamt
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_mul(instruction, machine_state):
@@ -189,8 +179,6 @@ def ex_mul(instruction, machine_state):
     new_value = rn_data * rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_orr(instruction, machine_state):
     # print("ORR")
@@ -199,16 +187,12 @@ def ex_orr(instruction, machine_state):
     new_value = rn_data | rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_orri(instruction, machine_state):
     # print("ORRI")
     rn_data = machine_state.registers[instruction.Rn].data
     new_value = rn_data | instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_prnl():
@@ -230,8 +214,6 @@ def ex_sdiv(instruction, machine_state):
     new_value = int(rn_data / rm_data)
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
-
 
 def ex_smulh(instruction, machine_state):
     print("SMULH NOT IMPLEMENTED")
@@ -244,7 +226,11 @@ def ex_stur(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     address = instruction.dtaddr + rn_data
 
-    machine_state.set_value_at_address(address, rt_data)
+    in_stack = False
+    if instruction.Rn == 28:
+        in_stack = True
+
+    machine_state.set_value_at_address(address, rt_data, in_stack)
 
 
 def ex_sturb(instruction, machine_state):
@@ -270,7 +256,6 @@ def ex_sub(instruction, machine_state):
     new_value = rn_data - rm_data
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
     return new_value
 
 
@@ -281,7 +266,6 @@ def ex_subi(instruction, machine_state):
     new_value = rn_data - instruction.aluimm
     machine_state.registers[instruction.Rd].data = new_value
 
-    machine_state.shift_memory(new_value)
     return new_value
 
 
@@ -310,8 +294,6 @@ def ex_udiv(instruction, machine_state):
 
     new_value = int(rn_data / rm_data)
     machine_state.registers[instruction.Rd].data = new_value
-
-    machine_state.shift_memory(new_value)
 
 
 def ex_umulh(instruction, machine_state):

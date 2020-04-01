@@ -6,13 +6,12 @@ from conditionals import CONDITIONS, Conditional, TYPES
 
 class Machine:
     def __init__(self):
-        # subtract from stack
-        self.stack = "{:0512b}".format(0)  # string binary representation of all data in stack
+        # subtract from stack (ie. fill stack backwards)
+        self.stack = []
         self.stack_size = STACK_SIZE
-        # self.stack_location held in register 28's data as int
 
-        # add to memory
-        self.memory = "{:04096b}".format(0)  # string binary representation of all data in memory
+        # add to memory (ie. fill memory forwards)
+        self.memory = []
         self.memory_size = MEMORY_SIZE
         self.memory_location = 0
 
@@ -27,6 +26,14 @@ class Machine:
         self.condition_registers = {}
 
         self.init_registers()
+        self.init_storage()
+
+    def init_storage(self):
+        for i in range(self.memory_size):
+            self.memory.append(0)
+
+        for i in range(self.stack_size):
+            self.stack.append(0)
 
     def init_registers(self):
         # 32 registers
@@ -61,33 +68,35 @@ class Machine:
             to_print = to_print.replace("X31", "XZR")
             print(" ", to_print)
 
-    def print_memory(self):
-        start = 0
-        end = 8
-        counter = 0
-        while start != (self.memory_size - 8):
-            section = self.memory[start:end]
-            print("Location {}: {}".format(counter, int(section, 2)))
-            start = end
-            end += 8
-            counter += 1
-
-    def convert_and_store_binary_string(self, decimal_value, address):
-        binary_rep = "{:08b}".format(decimal_value)
-        before = self.memory[:address]
-        after = self.memory[address + 8:]
-        self.memory = before + binary_rep + after
-
     def check_out_of_bounds(self):
         if self.registers[28].data < 8 or self.PC > 4088:
             print("Error: Attempting to access out of bounds address")
             ex_dump(self)
 
-    def shift_memory(self, value):
-        start_address = self.memory_location  # DEBUGGING
-        self.convert_and_store_binary_string(value, self.memory_location)
+    def get_value_at_address(self, address, in_stack):
+        binary_string = ""
+        for i in range(8):
+            if in_stack:
+                binary_string += str(self.memory[address+i])
+            else:
+                binary_string += str(self.memory[address+i])
 
-        self.memory_location += 8
+        value = int(binary_string, 2)
+        return value
+
+    def set_value_at_address(self, address, new_value, in_stack):
+
+        binary_rep = list("{:08b}".format(new_value))
+
+        for i in range(8):
+            if in_stack:
+                self.stack[address+i] = binary_rep[i]
+            else:
+                self.memory[address+i] = binary_rep[i]
+
+    def print_stats(self):
+        print("\nInstructions Executed: {}\nLoads Executed: {}\nStores Executed: {}\n".format(
+            self.instructions_executed, self.loads_issued, self.stores_issued))
 
     def set_conditional_flags(self, result):
         self.reset_conditional_registers()
@@ -102,18 +111,6 @@ class Machine:
             conditional = reg.data
             if conditional.name in TYPES[type_list]:
                 conditional.set_flag()
-
-    def get_value_at_address(self, address):
-        binary_string = self.memory[address:address+8]
-        value = int(binary_string, 2)
-        return value
-
-    def set_value_at_address(self, address, new_value):
-        self.convert_and_store_binary_string(new_value, address)
-
-    def print_stats(self):
-        print("\nInstructions Executed: {}\nLoads Executed: {}\nStores Executed: {}\n".format(
-            self.instructions_executed, self.loads_issued, self.stores_issued))
 
     def get_conditional_value(self, reg_number):
         for key, value in self.condition_registers.items():

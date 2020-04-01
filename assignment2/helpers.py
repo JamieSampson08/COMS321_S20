@@ -1,3 +1,5 @@
+import binascii
+
 from directory import instruct_dir
 
 
@@ -22,32 +24,72 @@ def how_to_read_mem_stack_table():
 
 def printable_char(c):
     """
-
+    TODO - doesn't work
     :param c:
     :return: c if printable, else "."
     """
-    return c if c.isprintable() else '.'
+    hex_fenced_value = ".."
+    if c[0] != 0 and c[0].isprintable:
+        hex_fenced_value = hex_fenced_value.replace(".", c[0], 1)
+    if c[1] != 0 and c[1].isprintable:
+        hex_fenced_value = hex_fenced_value.replace(".", c[1], 2)
+    return hex_fenced_value if hex_fenced_value != "00" else '.'
 
 
-# TODO - broken
-def hexdump(file, start, size, machine_state):
+def format_storage_to_dump(storage):
+    storage_array = []
+
+    for i in range(0, len(storage), 8):
+        binary_string = ""
+        for k in range(8):
+            binary_string += str(storage[i + k])
+
+        # convert stored binary string to int
+        val = int(binary_string, 2)
+
+        # handle if values are negative
+        if val < 0:
+            val = "{:X}".format(val & (2 ** 64 - 1))
+            val = int(val, 16)
+
+        # change int to hex rep
+        hex_string = "{:016x}".format(val)
+        hex_list = list(hex_string)
+        for i in range(0, 16, 2):
+            hex_pair = hex_list[i] + hex_list[i+1]
+            storage_array.append(hex_pair)
+    return storage_array
+
+
+def hexdump(file, size, machine_state):
     """
     Formats the contents of storage/stack
     :param file: to write to
-    :param start: address location
     :param size: either size of storage or size of stack
     :param machine_state: need access to memory
     :return:
     """
     i = 0
-    storage = machine_state.storage
+
+    storage = format_storage_to_dump(machine_state.memory)
+
+    if size == machine_state.stack_size:
+        storage = format_storage_to_dump(machine_state.stack)
 
     while i < (size - size % 16):
-        file.write("{:#010x} "
-                   " {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} "  # 02hhx
-                   " {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} {:#06x} "  # 02hhx
-                   " |{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}|"  # char
-                   "\n".format(i,
+        offset = "{:0x}".format(i)
+
+        if len(offset) != 10:
+            len_diff = 10 - len(offset)
+            zero_padding = "0" * len_diff
+            offset = zero_padding + offset
+        # offset = 0 -> next 16 bytes (ie. 4 sets of 8 bits)
+
+        file.write("{} "
+                   " {} {} {} {} {} {} {} {} " 
+                   " {} {} {} {} {} {} {} {}" 
+                   " |{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}|"
+                   "\n".format(offset,
                                storage[i + 0], storage[i + 1], storage[i + 2], storage[i + 3],
                                storage[i + 4], storage[i + 5], storage[i + 6], storage[i + 7],
                                storage[i + 8], storage[i + 9], storage[i + 10], storage[i + 11],
@@ -65,4 +107,4 @@ def hexdump(file, start, size, machine_state):
                                printable_char(storage[i + 15])))
         i += 16
 
-    file.write("{:#010x}\n".format(size))
+    file.write("{:010x}\n".format(size))
