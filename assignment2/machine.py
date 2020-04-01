@@ -17,6 +17,7 @@ class Machine:
 
         self.filename = None
         self.PC = 0  # current instruction index
+        self.altered_pc = False
         self.binary_instructions = None
         self.instructions_executed = 0
         self.loads_issued = 0
@@ -75,9 +76,10 @@ class Machine:
 
     def get_value_at_address(self, address, in_stack):
         binary_string = ""
+
         for i in range(8):
             if in_stack:
-                binary_string += str(self.memory[address+i])
+                binary_string += str(self.stack[address+i])
             else:
                 binary_string += str(self.memory[address+i])
 
@@ -85,7 +87,6 @@ class Machine:
         return value
 
     def set_value_at_address(self, address, new_value, in_stack):
-
         binary_rep = list("{:08b}".format(new_value))
 
         for i in range(8):

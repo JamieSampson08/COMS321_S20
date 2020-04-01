@@ -1,5 +1,5 @@
 Jamie Sampson (sampson1)
+No build script needed
 
-TODO:
-- write all functions for instructions
-- hexdump function
+Usage:
+./run.sh <machine file>

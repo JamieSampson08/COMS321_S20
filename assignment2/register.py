@@ -46,6 +46,11 @@ class Register:
         if data < 0:
             data = "{:X}".format(data & (2 ** 64 - 1))
             data = int(data, 16)
-        information = "{:>5} X{:<3}: {:#018x} ({:d})".format(use_info, self.reg_number, data, data)
+
+        # only show hex rep if not zero
+        if data != 0:
+            information = "{:>5} X{:<3}: {:#018x} ({:d})".format(use_info, self.reg_number,  data, data)
+        else:
+            information = "{:>5} X{:<3}: {:018x} ({:d})".format(use_info, self.reg_number, data, data)
         print(information)
 

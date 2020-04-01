@@ -39,6 +39,7 @@ def ex_andi(instruction, machine_state):
 
 def ex_b(instruction, machine_state):
     machine_state.PC += instruction.braddr
+    machine_state.altered_pc = True
     return True
 
 
@@ -47,6 +48,7 @@ def ex_b_cond(instruction, machine_state):
 
     if result:
         machine_state.PC += instruction.condaddr
+        machine_state.altered_pc = True
         return True
 
 
@@ -59,6 +61,7 @@ def ex_bl(instruction, machine_state):
 def ex_br(instruction, machine_state):
     rn_data = machine_state.registers[instruction.Rn].data
     machine_state.PC = rn_data
+    machine_state.altered_pc = True
     return True
 
 
@@ -66,6 +69,7 @@ def ex_cbnz(instruction, machine_state):
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data != 0:
         machine_state.PC += instruction.condaddr
+        machine_state.altered_pc = True
         return True
 
 
@@ -73,6 +77,7 @@ def ex_cbz(instruction, machine_state):
     rt_data = machine_state.registers[instruction.Rt].data
     if rt_data == 0:
         machine_state.PC += instruction.condaddr
+        machine_state.altered_pc = True
         return True
 
 
@@ -86,6 +91,7 @@ def ex_dump(machine_state):
     print("\nMain Memory:")
     hexdump(sys.stdout, machine_state.memory_size, machine_state)
 
+    print("\n")
     machine_state.print_program()
     machine_state.print_stats()
 
@@ -274,6 +280,7 @@ def call_instructions(machine_state):
     # using the list of binary_instructions, handle branching by changing where the for loop
     # starts reading from by using the PC
     for instruction in machine_state.binary_instructions[machine_state.PC:]:
+        machine_state.altered_pc = False
         machine_state.check_out_of_bounds()
         name = instruction.name
 
@@ -372,11 +379,11 @@ def call_instructions(machine_state):
         else:
             set_new_index = func(instruction, machine_state) or False
 
+            if set_new_index:
+                break  # from for loop
+
         if not progress_machine(machine_state):
             return
-
-        if set_new_index:
-            break  # from for loop
 
 
 def execute_assembly(binary_instructions, filename, machine_state):
@@ -405,8 +412,10 @@ def progress_machine(machine_state):
     :param machine_state: current state of machine
     :return: bool, if reached end of program
     """
+    if not machine_state.altered_pc:
+        machine_state.PC += 1
+
     machine_state.instructions_executed += 1
-    machine_state.PC += 1
     machine_state.registers[31].data = 0
 
     # when the PC exceeds the address of the last instruction, end program
