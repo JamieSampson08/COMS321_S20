@@ -1,0 +1,58 @@
+ADDI X0, XZR, #1
+SUBIS XZR, X0, #0
+B.GT skip1
+DUMP
+skip1:
+B.GE skip2
+DUMP
+skip2:
+B.HI skip3
+DUMP
+skip3:
+B.HS skip4
+DUMP
+skip4:
+B.PL skip5
+DUMP
+skip5:
+B.NE skip6
+DUMP
+skip6:
+SUBIS XZR, X0, #1
+B.EQ skip7
+DUMP
+skip7:
+B.GE skip8
+DUMP
+skip8:
+B.HS skip9
+DUMP
+skip9:
+B.LE skip10
+DUMP
+skip10:
+B.LS skip11
+DUMP
+skip11:
+B.PL skip12
+DUMP
+skip12:
+SUBIS XZR, X0, #2
+B.LE skip13
+DUMP
+skip13:
+B.LO skip14
+DUMP
+skip14:
+B.LS skip15
+DUMP
+skip15:
+B.LT skip16
+DUMP
+skip16:
+B.MI skip17
+DUMP
+skip17:
+B.NE skip18
+DUMP
+skip18:
