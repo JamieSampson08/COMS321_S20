@@ -1,4 +1,4 @@
-# Assignment 2
+# Binary Emulator
 Jamie Sampson   
 Spring 2019 : COM S 321 - Computer Architecture
 
